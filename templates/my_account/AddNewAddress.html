@@ -1,0 +1,93 @@
+<div class="bg0 p-t-95 p-b-70">
+		<div class="container">
+
+			<div class="size-a-1 flex-col-c-m p-b-70">
+				<div class="txt-center txt-m-201 cl10 how-pos1-parent m-b-14">
+					Flower Shop
+					<div class="how-pos1">
+						<img src="images/serving-dish.png" alt="IMG">
+					</div>
+				</div>
+
+				<h3 class="txt-center txt-l-101 cl3 respon1">
+					Add an address
+				</h3>
+			</div>
+			<!-- Tab03 -->
+			<div style="margin-top:30px;" class="text-center loading" ng-show="vm.loading"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+			<div ng-show="!vm.loading" class="tab03">
+				<div class="row">
+
+					<div class="col-md-9 col-lg-10 p-b-30">
+						<!-- Tab panes -->
+						<div class="tab-content p-l-70 p-l-0-lg">
+							<div class="col-xs-12" id="alert_msg">
+								<div id="alert_msg_content" class="alert">
+								</div>
+							</div>
+							<!-- - -->
+							<div >
+								<form>
+									<div class="row">
+										<div class="col-sm-12 p-b-23">
+											<!-- <div class="flex-w flex-sb-m p-t-20">
+
+									              <a href="#/history" class="flex-c-m txt-s-105 cl0 bg10 size-a-33 hov-btn2 trans-04 pointer p-rl-10 m-tb-10"><i class="fa fa-arrow-circle-left m-r-7"></i>    Back to history
+									              </a>
+
+									       </div> -->
+											<h4 class="txt-m-124 cl3 p-b-28">
+												ADDRESS INFORMATION
+											</h4>
+											<div>
+												<div class="txt-s-101 cl6 p-b-10">
+													Address <span class="cl12">*</span>
+												</div>
+
+												<input ng-model="vm.street" class="plh2 txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1 m-b-20" type="text" name="street" placeholder="Street address">
+
+												<input ng-model="vm.street_number" class="plh2 txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1 m-b-20" type="number" name="street" placeholder="Street Number">
+
+												<input ng-model="vm.building" class="plh2 txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="add" placeholder="Apartment, suite, unit etc. (optional)">
+											</div>
+										</div>
+
+										<div class="col-sm-6 p-b-23">
+											<div>
+												<div class="txt-s-101 cl6 p-b-10">
+													Town/City <span class="cl12">*</span>
+												</div>
+
+												<input ng-model="vm.city" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="city">
+											</div>
+										</div>
+
+										<div class="col-sm-6 p-b-23">
+											<div>
+												<div class="txt-s-101 cl6 p-b-10">
+													Postcode / Zip <span class="cl12">*</span>
+												</div>
+
+												<input maxlength="4" ng-model="vm.postalCode" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="postcode">
+												<div>
+											      <span class="inline-error" ng-show="!vm.postalCodeValid && !vm.checkingCodeValidity">
+											        This postal code is not available for delivery</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="flex-w p-rl-15 p-t-17">
+											<button ng-click="vm.saveAddress()" class="flex-c-m txt-s-105 cl0 bg10 size-a-21 hov-btn2 trans-04 p-rl-10" ng-class="(vm.loading) ? 'is-disabled': ''">
+												<i ng-if="vm.loading" class="fa fa-spinner fa-spin fa-1x loading"></i>
+												<span> {{vm.loading ? 'LOADING ..' : 'Save  Address'}}</span>
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

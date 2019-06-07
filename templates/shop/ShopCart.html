@@ -1,0 +1,266 @@
+<style>
+
+	.btm-border{
+		border-bottom: 2px solid #f5f5f5;
+	}
+
+	.modal-header {
+		display: block;
+	}
+
+	.radio-btn{
+		display: flex;
+		align-items: center;
+	}
+	.ingredients{
+		font-size: 12px;
+		color: #6a666a;
+	}
+
+	.table-shopping-cart .column-1 {
+		width: 150px;
+	}
+
+	.table-shopping-cart .table_row .column-2 {
+		font-family: Lato-Bold;
+		font-size: 18px;
+		color: #333;
+		line-height: 1.6;
+	}
+
+</style>
+
+<!-- content page -->
+<div class="bg0 p-tb-50">
+	<div class="container">
+		<div class="size-a-1 flex-col-c-m p-b-70">
+			<div class="txt-center txt-m-201 cl10 how-pos1-parent m-b-14">
+				Flower Shop
+				<div class="how-pos1">
+					<img src="images/serving-dish.png" alt="IMG">
+				</div>
+			</div>
+
+			<h3 class="txt-center txt-l-101 cl3 respon1">
+				Shopping Cart
+			</h3>
+		</div>
+		<div class="col-xs-12" id="alert_msg">
+			<div id="alert_msg_content" class="alert">
+			</div>
+		</div>
+		<form>
+			<div class="col-xs-12" ng-show="vm.isBasketEmpty"><div class="alert alert-warning">Your Shopping Cart is empty.</div></div>
+			<div class="wrap-table-shopping-cart">
+				<table class="table-shopping-cart">
+					<tr class="table_head bg12">
+						<th class="column-1 p-l-30">Product</th>
+						<th class="column-2"></th>
+						<th class="column-4">Price</th>
+						<th class="column-4">Quantity</th>
+						<th class="column-5">Total</th>
+						<th class="column-6"></th>
+					</tr>
+
+					<tr class="table_row" ng-repeat="prod in vm.my_basket_products_array track by $index">
+						<td class="column-1">
+							<div class="flex-w flex-m">
+								<div class="wrap-pic-w size-w-50 bo-all-1 bocl12 m-r-30">
+									<img id="img_{{prod.key}}" class="cursor" ng-if="prod.image" ng-click="vm.showItemDesc(prod.key)" ng-src="https://web.scriptr.io/apsdb/rest/{{vm.account}}/GetFile?apsws.time={{vm.time}}&apsws.authSig={{vm.authSig}}&apsws.responseType=json&apsws.authMode=simple&apsdb.fileName={{prod.image}}&apsdb.fieldName=attachments&apsdb.documentKey={{prod.key}}&apsdb.store=DefaultStore"/>
+
+									<img id="img_{{prod.key}}" class="cursor" ng-if="!prod.image" ng-click="vm.showItemDesc(prod.key)" class="set-product-img-max-height" ng-src="/images/dish256.png"/>
+								</div>
+							</div>
+						</td>
+
+						<td class="column-2">
+							<div>
+
+								<div>
+									<span>
+										{{prod.name}}
+									</span>
+									<span class="size-w-59 txt-m-104 cl6" ng-if="prod.portion == 'half'">
+										(half)
+									</span>
+								</div>
+
+								<div class="ingredients">
+									<span ng-if="prod.ingredients">
+										{{prod.ingredients.toString()}}
+									</span>
+								</div>
+							</div>
+						</td>
+
+						<td class="column-4">
+							<span>€{{(prod.portion && prod.portion == 'half') ? prod.halfPortionPrice : prod.price}}</span>
+							<!--span ng-if="prod.portion == ">€{{prod.halfPortionPrice}}</span-->
+						</td>
+						<!-- 	<td class="column-3">
+                                <div class="flex-w flex-sb-m">
+                                    <span>{{prod.quantity}}</span>
+                                </div>
+                            </td> -->
+						<td class="column-4">
+							<div ng-click="vm.updateQuantity(prod, 'id_shop_prod_input_')" class="wrap-num-product flex-w flex-m  p-rl-10">
+								<!-- <div class="btn-num-product-down flex-c-m fs-29"></div> -->
+
+								<input disabled="disabled" class="bg12 txt-m-102 cl6 txt-center num-product" type="number" name="num-product1" min="1" max="99" id="id_shop_prod_input_{{prod.key}}" value="{{prod.quantity}}">
+
+								<!-- <div class="btn-num-product-up flex-c-m fs-16"></div> -->
+							</div>
+						</td>
+						<td class="column-4">
+							<div class="flex-w flex-sb-m">
+								<span>€{{(prod.portion && prod.portion == 'half') ? (prod.halfPortionPrice * prod.quantity).toFixed(2) : (prod.price * prod.quantity).toFixed(2)}}</span>
+							</div>
+						</td>
+						<td class="column-6 col-edit-close">
+							
+							<span class="fs-15 hov-cl10 pointer edit-close" ng-click="vm.removeProduct(prod)">
+								<span class="lnr lnr-cross"></span>
+							</span>
+
+							<span class="fs-15 hov-cl10 pointer edit-close" data-toggle="modal" data-target="#myModal" ng-click="vm.onEditProduct(prod)">
+								<i class="fa fa-edit"></i>
+							</span>
+						</td>
+					</tr>
+
+				</table>
+			</div>
+
+			<!-- Modal -->
+			<div id="myModal" class="modal fade m-t-100" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h3 style="color: #81b03f" class="modal-title">{{vm.selectedProduct.name}}</h3>
+						</div>
+						<div class="modal-body">
+							<div ng-if="vm.selectedProduct.halfPortionPrice">
+								<span class="txt-m-103 cl3 txt-center hov-cl10 trans-04">Choose portion</span>
+								<div class="m-b-30">
+									<div class="flex-w flex-m btm-border p-tb-16">
+										<label style="width: 50%;" class="flex-sb-m-override flex-w txt-s-101 cl6 hov-cl10 trans-04 p-tb-3 pointer">
+											<input id="full" class="pointer" type="radio" name="portion" value="full" ng-checked=true>
+											<span class="set-radio-label m-r-5">Full </span><b style="color:#81b03f;"> €{{vm.selectedProduct.price}}</b>
+										</label>
+										<label style="width: 50%;" class="flex-sb-m-override flex-w txt-s-101 cl6 hov-cl10 trans-04 p-tb-3 pointer">
+											<input id="half" class="pointer" type="radio" name="portion" value="half">
+											<span class="set-radio-label m-r-5">Half </span><b style="color:#81b03f;"> €{{vm.selectedProduct.halfPortionPrice}}</b>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="m-b-30" ng-if="vm.defaultIngredients.length > 0">
+								<span class="txt-m-103 cl3 txt-center hov-cl10 trans-04">Default Ingredients</span>
+								<ul class="btm-border p-tb-16 ingredients-modal">
+									<li class="p-b-5" style="width:33%;" ng-repeat="ingredient in vm.defaultIngredients track by $index">
+										<label class="flex-sb-m-override flex-w txt-s-101 cl6 hov-cl10 trans-04 p-tb-3 pointer">
+											<input class="pointer" type="checkbox" checklist-model="vm.defaultIngredientsFilters" checklist-value="ingredient">
+											<span class="set-radio-label">{{ingredient}}</span>
+										</label>
+									</li>
+								</ul>
+							</div>
+							<div class="m-b-30" ng-if="vm.extraIngredients.length > 0">
+								<span class="txt-m-103 cl3 txt-center hov-cl10 trans-04">Extra Ingredients</span>
+								<ul class="btm-border p-tb-16 ingredients-modal">
+									<li class="p-b-5" style="width:33%;" ng-repeat="ingredient in vm.extraIngredients track by $index">
+										<label class="flex-sb-m-override flex-w txt-s-101 cl6 hov-cl10 trans-04 p-tb-3 pointer">
+											<input class="pointer" type="checkbox" checklist-model="vm.extraIngredientsFilters" checklist-value="ingredient">
+											<span class="set-radio-label">{{ingredient}}</span>
+										</label>
+									</li>
+								</ul>
+							</div>
+							<div>
+								<span class="txt-m-103 cl3 txt-center hov-cl10 trans-04">Notes:</span>
+								<textarea id="comments" placeholder="e.g. Well done (if you add ingredients in notes, there might be additional cost)" class="custom-textarea" ng-model="vm.comments" rows="4" cols="50">
+						        </textarea>
+							</div>
+						</div>
+						<div class="flex-w flex-m p-t-15 p-b-30">
+							<div class="col-centered flex-m">
+								<div class="wrap-num-product flex-w flex-m bg12 p-rl-10 m-b-30 col-lg-5 col-sm-5 col-xs-5">
+									<div class="btn-num-product-down flex-c-m fs-29"></div>
+
+									<input class="txt-m-102 cl6 txt-center num-product" type="number" name="num-product" id="id_popup_shop_input_{{vm.selectedProduct.key}}" min="1" max="99">
+
+									<div class="btn-num-product-up flex-c-m fs-16"></div>
+								</div>
+
+								<div class="col-lg-7 col-sm-7 col-xs-7 rm-pl">
+									<button ng-click="vm.editProduct(vm.selectedProduct, 'id_popup_shop_input_')" data-dismiss="modal" class="flex-c-m txt-s-103 cl0 bg10 size-a-2 size-add-to-cart hov-btn2 trans-04 m-b-30 js-addcart1">
+										Update
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="flex-w flex-sb-m p-t-20">
+				<div class="flex-w flex-m m-r-50 m-tb-10">
+					<input class="size-a-31 bo-all-1 bocl15 txt-s-123 cl6 plh1 p-rl-20 focus1 m-r-30 m-tb-10" type="text" name="coupon" placeholder="Coupon Code">
+
+					<div class="flex-c-m txt-s-105 cl0 bg10 size-a-32 hov-btn2 trans-04 pointer p-rl-10 m-tb-10">
+						apply coupon
+					</div>
+				</div>
+
+				<a href="#/gallery" class="flex-c-m txt-s-105 cl0 bg10 size-a-33 hov-btn2 trans-04 pointer p-rl-10 m-tb-10">
+					Continue shopping
+				</a>
+
+			</div>
+
+			<div class="flex-w flex-sb-m p-t-20">
+
+
+				<a ng-click="vm.emptyBasket()" href="" class="flex-c-m txt-s-105 cl0 bg10 size-a-33 hov-btn2 trans-04 pointer p-rl-10 m-tb-10">
+					Empty Basket
+				</a>
+
+			</div>
+
+			<div class="flex-col-l p-t-68">
+				<span class="txt-m-123 cl3 p-b-18">
+					CART TOTALS
+				</span>
+
+				<div class="flex-w flex-m bo-b-1 bocl15 w-full p-tb-18">
+					<span class="size-w-58 txt-m-109 cl3">
+						Total Items
+					</span>
+
+					<span class="size-w-59 txt-m-104 cl6">
+						{{vm.items_counter}}
+					</span>
+				</div>
+
+				<div class="flex-w flex-m bo-b-1 bocl15 w-full p-tb-18">
+					<span class="size-w-58 txt-m-109 cl3">
+						Total Amount
+					</span>
+
+					<span class="size-w-59 txt-m-104 cl10">
+						€{{vm.total_amount.toFixed(2)}}
+					</span>
+				</div>
+
+				<a ng-if="!vm.isBasketEmpty" href="" ng-click="vm.checkout()" class="flex-c-m txt-s-105 cl0 bg10 size-a-34 hov-btn2 trans-04 p-rl-10 m-t-43">
+					proceed to checkout
+				</a>
+			</div>
+		</form>
+	</div>
+</div>

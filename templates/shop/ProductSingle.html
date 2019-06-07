@@ -1,0 +1,429 @@
+
+<style type="text/css">
+
+	.flex-sb-m-override {
+		justify-content: unset;
+		align-items: center;
+	}
+
+	.item-div {
+		height: 355px;
+	}
+
+	.item-div > img {
+		padding: 26px;
+	}
+
+	.block1-wrap-icon {
+		bottom: 50px;
+	}
+
+	.item-grid-div {
+		height: 268px;
+	}
+
+	.item-grid-div > img {
+		padding: 26px;
+	}
+
+	.block1-content {
+		bottom: -33px;
+	}
+
+	.m-r-10 {
+		margin-right: 10px
+	}
+	.p-t-15 {
+		padding-top: 13px;
+	}
+
+	.set-product-img-max-height{
+		height: 223px!important;
+	}
+
+	.rm-pl
+	{
+		padding-right: 0px;
+		padding-left: 5px;
+	}
+
+	.set-width{
+		width: calc((100% - 60px) / 2);
+	}
+
+	.btm-border{
+		border-bottom: 2px solid #f5f5f5;
+	}
+
+	.modal-header {
+		display: block;
+	}
+
+	.radio-btn{
+		display: flex;
+		align-items: center;
+	}
+
+	.item-name-grid{
+		overflow: hidden;
+		text-overflow: ellipsis;
+		/* white-space: nowrap; */
+		width: 100%;
+		max-height: 63px;
+		padding-left: 7px;
+		padding-right: 7px;
+		text-align: center;
+	}
+
+
+</style>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade m-t-100" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 style="color: #81b03f" class="modal-title js-name1">{{vm.selectedProduct.name}}</h3>
+			</div>
+			<div class="modal-body">
+				<div ng-if="vm.selectedProduct.halfPortionPrice">
+					<span class="txt-m-103 cl3 txt-center hov-cl10 trans-04">Choose portion</span>
+					<div class="m-b-30">
+						<div class="flex-w flex-m btm-border p-tb-16">
+							<label style="width: 50%;" class="flex-sb-m-override flex-w txt-s-101 cl6 hov-cl10 trans-04 p-tb-3 pointer">
+								<input id="portion" class="pointer" type="radio" name="portion" value="full" ng-checked=true>
+								<span class="set-radio-label m-r-5">Full </span>
+								<b ng-if="!vm.selectedProduct.priceOffer" style="color:#81b03f;"> €{{vm.selectedProduct.price}}</b>
+								<b ng-if="vm.selectedProduct.priceOffer" style="color:#81b03f;"> €{{vm.selectedProduct.price}}</b>
+							</label>
+							<label style="width: 50%;" class="flex-sb-m-override flex-w txt-s-101 cl6 hov-cl10 trans-04 p-tb-3 pointer">
+								<input id="portion" class="pointer" type="radio" name="portion" value="half">
+								<span class="set-radio-label m-r-5">Half </span><b style="color:#81b03f;"> €{{vm.selectedProduct.halfPortionPrice}}</b>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="m-b-30" ng-if="vm.defaultIngredients.length > 0">
+					<span class="txt-m-103 cl3 txt-center hov-cl10 trans-04">Default Ingredients</span>
+					<ul class="btm-border p-tb-16 ingredients-modal">
+						<li class="p-b-5" style="width:33%;" ng-repeat="ingredient in vm.defaultIngredients track by $index">
+							<label class="flex-sb-m-override flex-w txt-s-101 cl6 hov-cl10 trans-04 p-tb-3 pointer">
+								<input class="pointer" type="checkbox" checklist-model="vm.defaultIngredientsFilters" checklist-value="ingredient">
+								<span class="set-radio-label">{{ingredient}}</span>
+							</label>
+						</li>
+					</ul>
+				</div>
+				<div class="m-b-30" ng-if="vm.extraIngredients.length > 0">
+					<span class="txt-m-103 cl3 txt-center hov-cl10 trans-04">Extra Ingredients</span>
+					<ul class="btm-border p-tb-16 ingredients-modal">
+						<li class="p-b-5" style="width:33%;" ng-repeat="ingredient in vm.extraIngredients track by $index">
+							<label class="flex-sb-m-override flex-w txt-s-101 cl6 hov-cl10 trans-04 p-tb-3 pointer">
+								<input class="pointer" type="checkbox" checklist-model="vm.extraIngredientsFilters" checklist-value="ingredient">
+								<span class="set-radio-label">{{ingredient}}</span>
+							</label>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<span class="txt-m-103 cl3 txt-center hov-cl10 trans-04">Notes:</span>
+					<textarea placeholder="e.g. Well done (if you add ingredients in notes, there might be additional cost)" class="custom-textarea" ng-model="vm.comments" rows="4" cols="50">
+					        </textarea>
+				</div>
+			</div>
+			<div class="flex-w flex-m p-t-15 p-b-30">
+				<div class="col-centered flex-m" style="width:204px;">
+					<div class="wrap-num-product flex-w flex-m bg12 p-rl-10 m-b-30 col-lg-5 col-sm-5 col-xs-5">
+						<div class="btn-num-product-down flex-c-m fs-29"></div>
+
+						<input class="txt-m-102 cl6 txt-center num-product" type="number" name="num-product" id="id_popup_prod_input_{{vm.selectedProduct.key}}" min="1" max="99" ng-value="1">
+
+						<div class="btn-num-product-up flex-c-m fs-16"></div>
+					</div>
+
+					<div class="col-lg-7 col-sm-7 col-xs-7 rm-pl">
+						<button ng-click="vm.updateBasket(vm.selectedProduct)" data-dismiss="modal" class="flex-c-m txt-s-103 cl0 bg10 size-a-2 size-add-to-cart hov-btn2 trans-04 m-b-30 js-addcart1">
+							Add to cart
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<section class="sec-product-detail bg0 p-t-105 p-b-70">
+	<div class="text-center loading" ng-show="!vm.product">
+		<i class="fa fa-spinner fa-spin fa-2x"></i>
+	</div>
+	<div ng-show="vm.product" class="container">
+		<div class="row">
+			<div class="col-md-7 col-lg-6">
+				<div class="m-r--30 m-r-0-lg">
+					<!-- Slide 100 -->
+					<div id="slide100-01">
+						<div class="wrap-main-pic-100 bo-all-1 bocl12 pos-relative">
+							<div class="main-frame">
+								<div class="wrap-main-pic">
+									<div class="main-pic">
+										<img ng-src="{{vm.images[0]}}"/>
+									</div>
+								</div>
+							</div>
+
+							<div class="wrap-arrow-slide-100 s-full ab-t-l trans-04">
+								<span class="my-arrow back prev-slide-100"><i class="fa fa-angle-left m-r-1" aria-hidden="true"></i></span>
+								<span class="my-arrow next next-slide-100"><i class="fa fa-angle-right m-l-1" aria-hidden="true"></i></span>
+							</div>
+						</div>
+
+						<div class="wrap-thumb-100 flex-w flex-sb p-t-30">
+							<div class="thumb-100" ng-show="vm.images.length > 1" ng-class="(vm.images.length == 3)  ? 'set-width' : ''">
+								<div class="sub-frame sub-1">
+									<div class="wrap-main-pic">
+										<div class="main-pic">
+											<img ng-src="{{vm.images[1]}}" alt="IMG-SLIDE">
+										</div>
+									</div>
+
+									<div class="btn-sub-frame btn-1 bo-all-1 bocl12 hov8 trans-04"></div>
+								</div>
+							</div>
+
+							<div class="thumb-100" ng-show="vm.images.length > 2" ng-class="(vm.images.length == 3)  ? 'set-width' : ''">
+								<div class="sub-frame sub-2">
+									<div class="wrap-main-pic">
+										<div class="main-pic">
+											<img ng-src="{{vm.images[2]}}" alt="IMG-SLIDE">
+										</div>
+									</div>
+
+									<div class="btn-sub-frame btn-2 bo-all-1 bocl12 hov8 trans-04"></div>
+								</div>
+							</div>
+
+							<div class="thumb-100" ng-show="vm.images.length > 3" ng-class="(vm.images.length == 3)  ? 'set-width' : ''">
+								<div class="sub-frame sub-3">
+									<div class="wrap-main-pic">
+										<div class="main-pic">
+											<img ng-src="{{vm.images[3]}}" alt="IMG-SLIDE">
+										</div>
+									</div>
+
+									<div class="btn-sub-frame btn-3 bo-all-1 bocl12 hov8 trans-04"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-5 col-lg-6">
+				<div class="p-l-70 p-t-35 p-l-0-lg">
+					<h4 class="js-name1 txt-l-104 cl3 p-b-16">
+						{{vm.product.name}}
+					</h4>
+
+					<span class="txt-m-117 cl9">
+							<span ng-if="!vm.product.priceOffer" style="color:#81b03f;">€{{vm.product.price}}
+							</span>
+							<s ng-if="vm.product.priceOffer" style="color:red;"> €{{vm.product.price}}</s>
+							<span ng-if="vm.product.priceOffer" style="color:#81b03f;"> €{{vm.product.priceOffer}}</span>
+							<span ng-if="vm.product.unit"> / {{vm.product.unit}}</span>
+						</span>
+
+					<div class="flex-w flex-m p-t-30 p-b-27">
+						<!--span class="fs-16 cl11 lh-15 txt-center m-r-15">
+                            <i class="fa fa-star m-rl-1"></i>
+                            <i class="fa fa-star m-rl-1"></i>
+                            <i class="fa fa-star m-rl-1"></i>
+                            <i class="fa fa-star m-rl-1"></i>
+                            <i class="fa fa-star m-rl-1"></i>
+                        </span-->
+
+						<span ng-if="vm.product.default_ingredients" class="txt-s-115 cl6 p-b-3">
+								<b>Ingredients:</b> {{vm.product.default_ingredients.toString()}}
+							</span>
+
+					</div>
+
+					<p class="txt-s-101 cl6">
+						{{vm.product.description}}
+					</p>
+
+					<div class="flex-w flex-m p-t-55 p-b-30">
+						<!-- <div class="wrap-num-product flex-w flex-m bg12 p-rl-10 m-r-30 m-b-30">
+                            <div class="btn-num-product-down flex-c-m fs-29"></div>
+
+                            <input class="txt-m-102 cl6 txt-center num-product" type="number" name="num-product" min="1" max="99" id="id_prod_single_input_{{vm.product.key}}" ng-value="{{vm.added_products[vm.product.key].quantity || 1}}">
+
+                            <div class="btn-num-product-up flex-c-m fs-16"></div>
+                        </div> -->
+
+						<button ng-click="vm.onAddItem(vm.product)" data-toggle="modal" data-target="#myModal" class="flex-c-m txt-s-103 cl0 bg10 size-a-2 hov-btn2 trans-04 m-b-30">
+							Add to cart
+						</button>
+					</div>
+
+					<div ng-if="vm.product.calories" class="txt-s-107 p-b-6">
+							<span class="cl6">
+								Calories:
+							</span>
+
+						<span class="cl9">
+								{{vm.product.calories}} (gr)
+							</span>
+					</div>
+
+					<div ng-if="vm.product.fat" class="txt-s-107 p-b-6">
+							<span class="cl6">
+								Fat:
+							</span>
+
+						<span class="cl9">
+								{{vm.product.fat}} (gr)
+							</span>
+					</div>
+
+					<div ng-if="vm.product.carbs" class="txt-s-107 p-b-6">
+							<span class="cl6">
+								Carbs:
+							</span>
+
+						<span class="cl9">
+								{{vm.product.carbs}} (gr)
+							</span>
+					</div>
+
+					<div ng-if="vm.product.protein" class="txt-s-107 p-b-6">
+							<span class="cl6">
+								Protein:
+							</span>
+
+						<span class="cl9">
+								{{vm.product.protein}} (gr)
+							</span>
+					</div>
+
+					<br>
+					<br>
+
+
+					<div class="txt-s-107 p-b-6">
+							<span class="cl6">
+								Category:
+							</span>
+
+						<span class="cl9">
+								{{vm.product.subCategory}}
+							</span>
+					</div>
+
+					<!--div class="txt-s-107 p-b-6">
+							<span class="cl6">
+								Tags:
+							</span>
+
+						<a href="#" class="txt-s-107 cl9 hov-cl10 trans-04">
+							Healthy,
+						</a>
+
+						<a href="#" class="txt-s-107 cl9 hov-cl10 trans-04">
+							Organic
+						</a>
+					</div-->
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</section>
+
+<!-- Related product -->
+<!-- 	<div class="text-center loading" ng-show="!vm.products">
+		<i class="fa fa-spinner fa-spin fa-2x"></i>
+	</div> -->
+<section ng-show="vm.products.length > 0" class="sec-related bg0 p-b-85">
+	<div class="container">
+		<!-- slide9 -->
+		<div class="wrap-slick9">
+			<div class="flex-w flex-sb-m p-b-33 p-rl-15">
+				<h3 class="txt-l-112 cl3 m-r-20 respon1 p-tb-15">
+					RELATED ITEMS
+				</h3>
+
+				<div class="wrap-arrow-slick9 flex-w m-t-6"></div>
+			</div>
+
+			<div class="slick9">
+				<!-- - -->
+				<div class="item-slick9 p-all-15" ng-repeat="product in vm.products track by $index">
+					<!-- Block1 -->
+					<div class="block1">
+						<div class="block1-bg wrap-pic-w bo-all-1 bocl12 hov3 trans-04 item-div">
+							<img id="img_{{product.key}}" ng-click="vm.showItemDesc(product.key)" ng-if="product.image" class="set-product-img-max-height cursor" ng-src="https://web.scriptr.io/apsdb/rest/{{vm.account}}/GetFile?apsws.time={{vm.time}}&apsws.authSig={{vm.authSig}}&apsws.responseType=json&apsws.authMode=simple&apsdb.fileName={{product.image}}&apsdb.fieldName=attachments&apsdb.documentKey={{product.key}}&apsdb.store=DefaultStore"/>
+
+							<img id="img_{{product.key}}" ng-click="vm.showItemDesc(product.key)" ng-if="!product.image" class="set-product-img-max-height" ng-src="/images/dish256.png"/>
+
+							<div class="block1-content flex-col-c-m p-b-60">
+								<a href="#/productSingle?key={{product.key}}" class="item-name-grid txt-m-103 cl3 txt-center hov-cl10 trans-04 js-name1">
+									{{product.name}}
+								</a>
+
+								<span class="block1-content-more txt-m-104 cl9 p-t-13 trans-04">
+										<span ng-if="!product.priceOffer" style="color:#81b03f;">€{{product.price}}</span>
+										<s ng-if="product.priceOffer" style="color:red;"> €{{product.price}}</s>
+										<span ng-if="product.priceOffer" style="color:#81b03f;"> €{{product.priceOffer}}</span>
+										<span ng-if="product.unit"> / {{product.unit}}</span>
+									</span>
+
+								<span ng-if="product.default_ingredients || product.description" class="block1-content-more txt-s-101 cl9 p-t-13 trans-04 set-unit-length">
+										{{product.default_ingredients.toString() || product.description}}
+									</span>
+
+								<!--span ng-if="!product.default_ingredients && product.unit" class="block1-content-more txt-m-104 cl9 p-t-13 trans-04 set-unit-length">
+                                    {{product.unit}}
+                                </span-->
+
+								<div class="block1-wrap-icon flex-c-m flex-w trans-05">
+									<a href="#/productSingle?key={{product.key}}" class="block1-icon flex-c-m wrap-pic-max-w">
+										<img src="./images/icons/icon-view.png" alt="ICON">
+									</a>
+
+									<a ng-show="vm.isLoggedIn == true" href="javascript:void(0)" ng-click="vm.addRemoveProdWishList(product.key)" class="block1-icon flex-c-m wrap-pic-max-w" ng-class="vm.inFavorites(product.key) == true ? 'js-addedwish-b1' : 'js-addwish-b1'">
+										<img class="icon-addwish-b1" src="./images/icons/icon-heart.png" alt="ICON">
+										<img class="icon-addedwish-b1" src="./images/icons/icon-heart2.png" alt="ICON">
+									</a>
+
+								</div>
+							</div>
+						</div>
+						<div class="flex-w flex-m p-t-15 p-b-30">
+							<!-- 	<div class="wrap-num-product flex-w flex-m bg12 p-rl-10 m-b-30 col-lg-4 col-sm-4 col-xs-4">
+									<div class="btn-num-product-down flex-c-m fs-29"></div>
+
+									<input class="txt-m-102 cl6 txt-center num-product" type="number" name="num-product" min="1" max="99" id="id_related_prod_input_{{product.key}}" ng-value="{{vm.added_products[product.key].quantity || 1}}">
+
+									<div class="btn-num-product-up flex-c-m fs-16"></div>
+								</div>
+ -->
+							<div class="col-lg-12 col-sm-12 col-xs-12 rm-pl">
+								<button ng-click="vm.onAddItem(product)" data-toggle="modal" data-target="#myModal" class="flex-c-m txt-s-103 cl0 bg10 size-a-2 size-add-to-cart hov-btn2 trans-04 m-b-30">
+									Add to cart
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+</section>

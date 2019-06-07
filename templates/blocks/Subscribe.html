@@ -1,0 +1,27 @@
+<section class="sec-subscribe bg13 p-t-65 p-b-65">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 p-tb-15">
+				<div class="h-full flex-col-m">
+					<h4 class="txt-m-110 cl3 p-b-4">
+						INSCRIVEZ-VOUS À LA NEWSLETTER.
+					</h4>
+
+					<p class="txt-s-101 cl6">
+						Recevez des mises à jour par e-mail sur notre dernière boutique et nos offres spéciales.
+					</p>
+				</div>
+			</div>
+
+			<div class="col-md-7 p-tb-15">
+				<form name="subscribeEmail" class="flex-w flex-m h-full">
+					<input ng-model="vm.email" class="size-a-6 txt-s-106 cl6 plh0 p-rl-30 w-full-sm" type="email" name="email" placeholder="Your email address" required>
+					
+					<button ng-click="vm.subscribe();vm.submitted=true;" class="bg10 size-a-5 txt-s-107 cl0 p-rl-15 trans-04 hov-btn2 mt-4 mt-sm-0" ng-class="(vm.loading) ? 'is-disabled': ''">	
+						<i ng-if="vm.loading" class="fa fa-spinner fa-spin fa-1x loading"></i><span> {{vm.loading ? 'LOADING ..' : 'INSCRIVEZ'}}</span>
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>

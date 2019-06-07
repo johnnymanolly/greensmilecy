@@ -1,0 +1,141 @@
+<div class="bg0 p-t-95 p-b-50">
+		<div class="container">
+			<div class="size-a-1 flex-col-c-m p-b-70">
+				<div class="txt-center txt-m-201 cl10 how-pos1-parent m-b-14">
+					Flower Shop
+					<div class="how-pos1">
+						<img src="images/serving-dish.png" alt="IMG">
+					</div>
+				</div>
+
+				<h3 class="txt-center txt-l-101 cl3 respon1">
+					Login / Registre
+				</h3>
+			</div>
+			<div class="row">
+				<div class="col-md-6 p-b-50">
+					<div class="p-r-15 p-rl-0-lg">
+						<h4 class="txt-m-124 cl3 p-b-28">
+							Login
+						</h4>
+
+						<form name="loginForm" class="how-bor3 p-rl-30 p-tb-32">
+							<div class="col-xs-12" id="login_alert">
+								<div id="login_alert_content" class="alert">
+								</div>
+							</div>
+							<div class="p-b-24">
+								<div class="txt-s-101 cl6 p-b-10">
+									Username or email address <span class="cl12">*</span>
+								</div>
+
+								<input ng-model="vm.email" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-15 focus1" type="email" name="email" placeholder="example@abc.xyz" required>
+								<div>
+							      <span class="inline-error" ng-show="vm.submitted && loginForm.email.$error.email">
+							        Not valid email</span>
+							    </div>
+							</div>
+
+							<div class="p-b-24">
+								<div class="txt-s-101 cl6 p-b-10">
+									Password <span class="cl12">*</span>
+								</div>
+
+								<input ng-model="vm.password" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-15 focus1" type="password" name="password" required>
+							</div>
+
+							<div class="flex-w flex-m p-t-15 p-b-10">
+								<button ng-click="vm.onLogin();vm.submitted=true;" class="flex-c-m txt-s-105 cl0 bg10 size-a-39 hov-btn2 trans-04 p-rl-10 m-r-18 not-active" ng-class="(vm.loading) ? 'is-disabled': ''">
+									<i ng-if="vm.loading" class="fa fa-spinner fa-spin fa-1x loading"></i><span> {{vm.loading ? 'LOADING ..' : 'LOGIN'}}</span>
+								</button>
+
+								<!-- <div class="flex-w flex-m p-tb-8">
+									<input id="check-creatacc" class="size-a-35 m-r-10" type="checkbox" name="creatacc">
+									<label for="check-creatacc" class="txt-s-101 cl9">
+										Create an account?
+									</label>
+								</div> -->
+							</div>
+
+							<a href="#/lostPassword" class="txt-s-101 cl9 hov-cl10 trans-04">
+								Lost your password?
+							</a>
+						</form>
+					</div>
+				</div>
+
+				<div class="col-md-6 p-b-50">
+					<div class="p-l-15 p-rl-0-lg">
+						<h4 class="txt-m-124 cl3 p-b-28">
+							Registre
+						</h4>
+
+						<form name="registrationForm" class="how-bor3 p-rl-30 p-t-32 p-b-66">
+							<div class="col-xs-12" id="register_alert">
+								<div id="register_alert_content" class="alert">
+								</div>
+							</div>
+							<div class="p-b-24">
+								<div class="txt-s-101 cl6 p-b-10">
+									First Name <span class="cl12">*</span>
+								</div>
+
+								<input ng-model="vm.firstName" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-15 focus1" type="text" name="firstName" required>
+							</div>
+
+							<div class="p-b-24">
+								<div class="txt-s-101 cl6 p-b-10">
+									Last Name <span class="cl12">*</span>
+								</div>
+
+								<input ng-model="vm.lastName" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-15 focus1" type="text" name="lastName" required>
+							</div>
+
+							<div class="p-b-24">
+								<div class="txt-s-101 cl6 p-b-10">
+									Email address <span class="cl12">*</span>
+								</div>
+
+								<input ng-model="vm.email" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-15 focus1" placeholder="example@abc.xyz" type="email" name="email" required>
+								<div>
+							      <span class="inline-error" ng-show="vm.submitted && registrationForm.email.$error.email">
+							        Not valid email</span>
+							    </div>
+							</div>
+
+							<div class="p-b-24">
+								<div class="txt-s-101 cl6 p-b-10">
+									Phone number <span class="cl12">*</span>
+								</div>
+
+								<input ng-model="vm.number" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-15 focus1" type="text" name="number" required>
+							</div>
+
+							<div class="p-b-24">
+								<div class="txt-s-101 cl6 p-b-10">
+									Password <span class="cl12">*</span>
+								</div>
+
+								<input ng-model="vm.password" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-15 focus1" type="password" name="password" required>
+							</div>
+
+							<div class="p-b-24">
+								<div class="txt-s-101 cl6 p-b-10">
+									Confirm Password <span class="cl12">*</span>
+								</div>
+
+								<input ng-model="vm.confirmPassword" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-15 focus1" type="password" name="confirmPassword" required>
+							</div>
+
+							<div ng-click="vm.register();vm.submitted=true;" class="flex-w flex-m p-t-15" ng-class="(vm.loading_register) ? 'is-disabled': ''">
+								<button class="flex-c-m txt-s-105 cl0 bg10 size-a-39 hov-btn2 trans-04 p-rl-10 m-r-18">
+									<i ng-if="vm.loading_register" class="fa fa-spinner fa-spin fa-1x loading"></i><span> {{vm.loading_register ? 'LOADING ..' : 'Registre'}}</span>
+								</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

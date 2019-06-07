@@ -1,0 +1,110 @@
+<style>
+    .ag-ltr .ag-header-cell-resize{
+        background: #a59c95;
+        width: 2px
+    }
+
+    .disabled {
+        border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;
+    }
+
+    .ag-cell {overflow: visible!important;}
+
+    .ag-cell-inner {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        position: relative;
+        white-space: pre;
+        top: 20%;
+    }
+    .set-dis-pos{
+       position: relative;
+       top: 20%;
+       padding: 1px;
+       padding-left: 32px;
+       padding-right: 30px;
+    }
+</style>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<div class="bg0 p-t-50 p-b-50">
+    <div class="container">
+      <div class="size-a-1 flex-col-c-m">
+        <div class="txt-center txt-m-201 cl10 how-pos1-parent m-b-14">
+          Flower Shop
+          <div class="how-pos1">
+            <img src="images/serving-dish.png" alt="IMG">
+          </div>
+        </div>
+
+        <h3 class="txt-center txt-l-101 cl3 respon1">
+          My History
+        </h3>
+      </div>
+
+<!--       <div class="container-fluid">
+        <div class="row pdt20">
+            <div class="rs1-select2 bg0 size-w-52 bo-all-1 bocl15 m-tb-7 m-r-15">
+              <select class="js-select2 select2-hidden-accessible" name="sort" tabindex="-1" aria-hidden="true" ng-model="vm.sort_type" ng-change="vm.onSortProducts()">
+                <option value="">Latest</option>
+                <option value="price<numeric:ASC>">Price (Low to High)</option>
+                <option value="price<numeric:DESC>">Price (High to Low)</option>
+                <option value="name<string:ASC>">Sort By Name</option>
+              </select>
+              <div class="dropDownSelect2"></div>
+            </div>
+        </div>
+    </div> -->
+    <!-- - -->
+    <div style="margin-top:30px;" class="text-center loading" ng-show="vm.loading"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+    <div ng-if="!vm.historyList && !vm.loading" class="tab-pane" id="orders" role="tabpanel">
+      <div class="bo-all-1 bocl15 flex-w flex-sb-m p-rl-30 p-tb-10 p-rl-15-ssm">
+        <div class="flex-t p-tb-8 m-r-30">
+          <img class="m-t-6 m-r-10" src="images/icons/icon-list.png" alt="IMG">
+          <span class="size-w-53 txt-s-101 cl6">
+            No order has been made yet.
+          </span>
+        </div>
+
+        <a href="#/gallery" class="flex-c-m txt-s-105 cl0 bg10 size-a-42 hov-btn2 trans-04 p-rl-10 m-tb-8">
+          go shop
+        </a>
+      </div>
+    </div>
+    <div class="col-xs-12" id="alert_msg">
+      <div id="alert_msg_content" class="alert">
+      </div>
+    </div>
+    <scriptr-grid ng-show="vm.historyList && !vm.loading"
+                  columns-definition='vm.historyColDef' 
+                  enable-sorting='true'
+                  default-cell-renderer="vm.defaultCellRenderer"   
+                  api = 'management/api/clients/getUserOrders'
+                  api-params='vm.gridParams'   
+                  grid-height='calc(100vh - 100px)'
+                  pagination="false"
+                  enable-col-resize="true"   
+                  suppress-filter='true'
+                  cell-editable='false'
+                  row-height='50'
+                  enable-client-side-filter='false'
+                  auto-refresh="10000"
+                  suppress-filter='false'
+                  enable-server-side-filter='false' 
+                  enable-server-side-sorting='true'
+                  row-model-type='infinite'
+                  row-model-selection='multiple'
+                  pagination-page-size='20'
+                  enable-delete-row='false'
+                  on-format-data="vm.onHistoryLoaded"
+                  transport='https'>
+    </scriptr-grid>
+
+
+
+  </div>
+</div>
+  

@@ -1,0 +1,113 @@
+
+<style type="text/css">
+
+    .background {
+        background-color: #ffffff;
+    }
+
+    .wrap-pic-w > img {
+        width: 370px;
+        height: 270px;
+    }
+</style>
+
+
+<section class="how-overlay2 bg-img1" style="background-image: url({{vm.titleImage || 'images/shops_title_image.jpg'}});">
+    <div class="container">
+        <div class="txt-center p-t-160 p-b-165">
+            <h3 class="txt-l-101 cl0 txt-center p-b-14 respon1">
+                Flower Shop
+            </h3>
+
+            <span class="txt-m-201 cl0 flex-c-m flex-w m-t-10">
+				<a href="javascript:window.location.href='index.html'" class="txt-m-201 cl0 hov-cl10 trans-04 m-r-6">
+					Home
+				</a>
+
+				<span>
+					/ Menu
+				</span>
+			</span>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery -->
+<div id="gallery" class="sec-gallery background p-t-50 p-b-98">
+    <div class="container">
+        <div class="size-a-1 flex-col-c-m p-b-70">
+            <div class="txt-center txt-m-201 cl10 how-pos1-parent m-b-14">
+                Try our delicious food!
+
+				<div class="how-pos1">
+					<img src="images/serving-dish.png" alt="IMG">
+				</div>
+			</div>
+
+			<h3 class="txt-center txt-l-101 cl3 respon1">
+				Menu
+			</h3>
+		</div>
+		<div ng-show="vm.categoriesType && vm.categoriesType.length > 1" class="flex-w flex-c-m filter-tope-group p-b-47">
+			<button class="txt-m-104 cl9 hov2 trans-04 p-rl-22 p-b-10 how-active1" data-filter="*">
+				All
+			</button>
+
+			<button class="txt-m-104 cl9 hov2 trans-04 p-rl-22 p-b-10" data-filter=".{{type}}-fill" ng-repeat="type in vm.categoriesType track by $index">
+				{{type}}
+			</button>
+
+		</div>
+		<div class="text-center loading" ng-show="!vm.categories"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+		<p ng-if="vm.categories.length == 0" class="no-products">No Items Found.</p>
+		<div class="row gallery-lb isotope-grid isotope-grid-gallery">
+			<div class="col-md-6 col-lg-4 p-b-30 isotope-item {{cat.type}}-fill cursor" ng-click="vm.openCategory(cat.key)" ng-repeat="cat in vm.categories">
+				<div class="flex-col-c p-rl-15 p-t-10 m-b-5">
+					<span class="txt-m-109 cl3 txt-center">
+						{{ cat.name }}
+					</span>
+				</div>
+				<div class="gallery-item wrap-pic-w">
+					<img ng-if="cat.image" class="set-cat-img-width" ng-src="https://web.scriptr.io/apsdb/rest/{{vm.account}}/GetFile?apsws.time={{vm.time}}&apsws.authSig={{vm.authSig}}&apsws.responseType=json&apsws.authMode=simple&apsdb.fileName={{cat.image}}&apsdb.fieldName=attachments&apsdb.documentKey={{cat.key}}&apsdb.store=DefaultStore"  alt="{{ cat.name}}" />
+
+					<div class="gallery-overlay flex-c-m trans-04">
+						<div class="gallery-content flex-w flex-c-m w-full">
+
+							<!--a class="flex-c-m gallery-btn m-all-5 trans-04 js-show-gallery js-gallery" href="https://web.scriptr.io/apsdb/rest/{{vm.account}}/GetFile?apsws.time={{vm.time}}&apsws.authSig={{vm.authSig}}&apsws.responseType=json&apsws.authMode=simple&apsdb.fileName={{cat.image}}&apsdb.fieldName=attachments&apsdb.documentKey={{cat.key}}&apsdb.store=DefaultStore"  alt="{{ cat.name}}">
+								<img src="images/icons/search-24.ico" alt="OPEN">
+							</a-->
+
+							<!--a class="flex-c-m gallery-btn m-all-5 trans-04" href="#/products?catKey={{cat.key}}">
+								<img src="images/icons/icon-open.png" alt="OPEN">
+							</a>			
+
+							<div class="gallery-txt flex-col-c p-rl-15 p-t-10 trans-04">
+								<span class="txt-m-109 cl0 txt-center">
+									{{ cat.name }}
+								</span>
+							</div-->
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Pagination -->
+		<div ng-show="false" class="flex-w flex-c-m p-t-48">
+			<a href="#" class="flex-c-m txt-s-115 cl6 size-a-23 bo-all-1 bocl15 hov-btn1 trans-04 m-all-3 active-pagi1">
+				1
+			</a>
+
+			<a href="#" class="flex-c-m txt-s-115 cl6 size-a-23 bo-all-1 bocl15 hov-btn1 trans-04 m-all-3">
+				2
+			</a>
+
+			<a href="#" class="flex-c-m txt-s-115 cl6 size-a-24 how-btn1 bo-all-1 bocl15 hov-btn1 trans-04 m-all-3 p-b-1">
+				Next
+				<span class="lnr lnr-chevron-right m-t-3 m-l-7"></span>
+				<span class="lnr lnr-chevron-right m-t-3"></span>
+			</a>
+		</div>
+	</div>
+</div>

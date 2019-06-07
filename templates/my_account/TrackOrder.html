@@ -1,0 +1,52 @@
+<style>
+    .back-to-panel {
+        margin-left:-15px;
+        margin-bottom: 8px;
+        font-size: 14px;
+        padding: 5px 0;
+        width: 125px;
+        margin-top: 5px;
+    }
+    .shop-list-title {
+        text-align: center;
+        color: #2555a4;
+        font-size: 20px;
+        padding-top: 6px;
+        padding-bottom: 3px;
+    }
+</style>
+
+<div class="bg0 p-t-50 p-b-50">
+    <div class="container">
+      <div class="size-a-1 flex-col-c-m p-b-70">
+        <div class="txt-center txt-m-201 cl10 how-pos1-parent m-b-14">
+          Flower Shop
+          <div class="how-pos1">
+            <img src="images/serving-dish.png" alt="IMG">
+          </div>
+        </div>
+
+        <h3 class="txt-center txt-l-101 cl3 respon1">
+         Track My Order
+        </h3>
+      </div>
+
+
+    <div class="flex-w flex-sb-m p-t-20">
+
+              <a href="#/history" class="flex-c-m txt-s-105 cl0 bg10 size-a-33 hov-btn2 trans-04 pointer p-rl-10 m-tb-10"><i class="fa fa-arrow-circle-left m-r-7"></i>    Back to history
+              </a>
+              <div class="col-xs-8">
+ <!--        <p class="shop-list-title">Tracking Order Number: {{vm.key}}</p> -->
+    </div>
+
+       </div>
+    
+
+    <div>
+        <iframe style="height: calc(100vh - 34px); width: 104%; border: 0;"  ng-src="{{vm.mapsSrc}}"></iframe>
+    </div>
+
+    </div>
+</div>
+

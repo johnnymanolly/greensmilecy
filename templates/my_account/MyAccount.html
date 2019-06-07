@@ -1,0 +1,122 @@
+<div class="bg0 p-t-95 p-b-70">
+		<div class="container">
+			<div class="size-a-1 flex-col-c-m p-b-70">
+				<div class="txt-center txt-m-201 cl10 how-pos1-parent m-b-14">
+					Flower Shop
+					<div class="how-pos1">
+						<img src="images/serving-dish.png" alt="IMG">
+					</div>
+				</div>
+
+				<h3 class="txt-center txt-l-101 cl3 respon1">
+					My Account
+				</h3>
+			</div>
+			<!-- Tab03 -->
+			<div class="tab03">
+				<div class="row">
+
+					<div class="col-md-9 col-lg-10 p-b-30">
+						<!-- Tab panes -->
+						<div class="tab-content p-l-70 p-l-0-lg">
+							<div class="col-xs-12" id="alert_msg">
+								<div id="alert_msg_content" class="alert">
+								</div>
+							</div>
+							<!-- - -->
+							<div >
+								<form name="myAccountForm">
+									<div class="row">
+										<div class="col-sm-6 p-b-23">
+											<div>
+												<div class="txt-s-101 cl6 p-b-10">
+													First Name <span class="cl12">*</span>
+												</div>
+
+												<input ng-model="vm.first_name" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="first-name" required>
+											</div>
+										</div>
+
+										<div class="col-sm-6 p-b-23">
+											<div>
+												<div class="txt-s-101 cl6 p-b-10">
+													Last Name <span class="cl12">*</span>
+												</div>
+
+												<input ng-model="vm.last_name" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="last-name" required>
+											</div>
+										</div>
+
+										<div class="col-sm-6 p-b-23">
+											<div>
+												<div class="txt-s-101 cl6 p-b-10">
+													Phone Number <span class="cl12">*</span>
+												</div>
+
+												<input ng-model="vm.number" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="number" required>
+											</div>
+										</div>
+
+										<div class="col-12 p-b-23">
+											<div>
+												<div class="txt-s-101 cl6 p-b-10">
+													Email address <span class="cl12">*</span>
+												</div>
+
+												<input ng-model="vm.email" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="email" name="email" placeholder="example@abc.xyz" required>
+												<div>
+											      <span class="inline-error" ng-show="vm.submitted && myAccountForm.email.$error.email">
+											        Not valid email</span>
+											    </div>
+											</div>
+										</div>
+
+										<h5 class="txt-m-109 cl3 p-rl-15 p-t-10 p-b-17">
+											Password change
+										</h5>
+
+									<!-- 	<div class="col-12 p-b-23">
+											<div>
+												<div class="txt-s-101 cl6 p-b-10">
+													Current password (leave blank to leave unchanged)
+												</div>
+
+												<input ng-model="current_pw" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="current-pw">
+											</div>
+										</div> -->
+
+										<div class="col-12 p-b-23">
+											<div>
+												<div class="txt-s-101 cl6 p-b-10">
+													New password (leave blank to leave unchanged)
+												</div>
+
+												<input ng-model="vm.new_pw" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="password" name="new-pw">
+											</div>
+										</div>
+
+										<div class="col-12 p-b-23">
+											<div>
+												<div class="txt-s-101 cl6 p-b-10">
+													Confirm new password
+												</div>
+
+												<input ng-model="vm.confirm_pw" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="password" name="cf-new-pw">
+											</div>
+										</div>
+
+										<div class="flex-w p-rl-15 p-t-17">
+											<button ng-click="vm.submit();vm.submitted=true;" class="flex-c-m txt-s-105 cl0 bg10 size-a-21 hov-btn2 trans-04 p-rl-10" ng-class="(vm.loading) ? 'is-disabled': ''">
+												<i ng-if="vm.loading" class="fa fa-spinner fa-spin fa-1x loading"></i>
+												<span> {{vm.loading ? 'LOADING ..' : 'Save  Profile'}}</span>
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

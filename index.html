@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>Flower Shop</title> 
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/icn_bouquet.png">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="./css/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="./css/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/slick.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/lightbox.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/layers.css">
+	<link rel="stylesheet" type="text/css" href="./css/navigation.css">
+	<link rel="stylesheet" type="text/css" href="./css/settings.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/nouislider.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/slide100.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/util.css">
+	<link rel="stylesheet" type="text/css" href="./css/main.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/magnific-popup.css">
+
+	<link rel="stylesheet" type="text/css" href="./UIComponents/components/grid/grid.css">
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+
+</head>
+<body ng-app="myApp" ng-controller="mainCtrl as vm" class="animsition" style="animation-duration: 1500ms; opacity: 1;">
+
+
+	<!-- Header -->
+	<header ng-include="'/templates/header/Header.html'"></header>
+
+    <!-- Home Title page -->
+	<div ng-if="vm.showHomeTitlePage" ng-include="'/templates/blocks/HomeTitlePage.html'"></div>
+	<div ng-if="vm.titlePage" ng-include="'/templates/blocks/TitlePage.html'"></div>
+
+	<!-- Coming Soon page -->
+	<div ng-if="vm.showComingSoon" ng-include="'/templates/others/ComingSoon.html'"></div>
+
+	<!-- Error page -->
+	<div ng-if="vm.show404Error" ng-include="'/templates/others/404Error.html'"></div>
+
+	<div ng-if="vm.showSection">
+        <ng-view></ng-view>
+    </div>
+
+    <!-- Logo -->
+    <!--div ng-if="vm.showLogo" ng-include="'/templates/blocks/Logo.html'"></div-->
+
+	<!-- Subscribe -->
+	<div ng-if="vm.showSubscribe" ng-include="'/templates/blocks/Subscribe.html'"></div>
+
+	<!-- Footer -->
+	<div ng-if="vm.showFooter" ng-include="'/templates/Footer.html'"></div>
+	
+	<!-- Back to top -->
+	<div class="btn-back-to-top bg0-hov" id="myBtn" style="display: none;">
+		<span class="symbol-btn-back-to-top">
+			<span class="lnr lnr-chevron-up"></span>
+		</span>
+	</div>
+
+<!--===============================================================================================-->	
+	<script src="/js/lib/jquery-3.2.1.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+<!--===============================================================================================-->
+	<script src="/js/lib/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/js/lib/popper.js"></script>
+	<script src="/js/lib/bootstrap.min.js"></script>
+
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+<!--===============================================================================================-->
+	<script src="./js/lib/theme/jquery.themepunch.tools.min.js"></script>
+	<script src="./js/lib/theme/jquery.themepunch.revolution.min.js"></script>
+	<script src="./js/lib/theme/revolution.extension.video.min.js"></script>
+	<script src="./js/lib/theme/revolution.extension.carousel.min.js"></script>
+	<script src="./js/lib/theme/revolution.extension.slideanims.min.js"></script>
+	<script src="./js/lib/theme/revolution.extension.actions.min.js"></script>
+	<script src="./js/lib/theme/revolution.extension.layeranimation.min.js"></script>
+	<script src="./js/lib/theme/revolution.extension.kenburn.min.js"></script>
+	<script src="./js/lib/theme/revolution.extension.navigation.min.js"></script>
+	<script src="./js/lib/theme/revolution.extension.migration.min.js"></script>
+	<script src="./js/lib/theme/revolution.extension.parallax.min.js"></script>
+	<script src="./js/lib/theme/revo-custom.js"></script>
+
+<!--===============================================================================================-->
+	<script src="./js/lib/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/js/lib/moment.min.js"></script>
+	<script src="/js/lib/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="/js/lib/slick.min.js"></script>
+	<!--script src="/js/lib/slick-custom.js"></script-->
+<!--===============================================================================================-->
+	<script src="/js/lib/parallax100.js"></script>
+<!--===============================================================================================-->
+	<script src="/js/lib/lightbox.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/js/lib/isotope.pkgd.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/js/lib/sweetalert.min.js"></script>
+
+<!--===============================================================================================-->
+    <script src="/js/lib/moment-timezone.min.js"></script>
+	<script src="/js/lib/moment-timezone-with-data.min.js"></script>
+	<script src="/js/lib/jquery.countdown.min.js"></script>
+	<script src="/js/lib/countdowntime.js"></script>
+
+<!--===============================================================================================-->
+	<script src="/js/lib/jquery.magnific-popup.min.js"></script>
+
+<!--===============================================================================================-->
+	<script src="/js/lib/perfect-scrollbar.min.js"></script>
+
+<!--===============================================================================================-->
+	<script src="/js/lib/jquery.waypoints.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/js/lib/jquery.counterup.min.js"></script>
+		
+<!--===============================================================================================-->
+	<script src="/js/lib/nouislider.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/js/lib/slide100.js"></script>
+<!--===============================================================================================-->
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtx7WzrbqO2FyutmBvhCP2yZYfjWdz07E"></script>
+	<!-- <script src="/js/map-custom.js"></script> -->
+   
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-cookies.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
+
+	<!-- Angular Lib -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ag-grid/18.0.0/ag-grid.js?ignore=notused36"></script> 
+    <script src="/UIComponents/components/grid/grid.js"></script>
+    <script src="/UIComponents/components/checklist/checklist-model.js"></script>
+    <script src="/js/httpProvider.js"></script>
+
+	<script src="/app/module.js"></script>
+	<script src="/app/appConfig.js"></script>  
+	<script src="/app/appServices.js"></script>
+
+	<!-- Controllers -->
+	<script src="/app/controllers/about.js"></script>
+	<script src="/app/controllers/addNewAddress.js"></script>
+	<script src="/app/controllers/checkout.js"></script>
+	<script src="/app/controllers/contactUs.js"></script>
+	<script src="/app/controllers/gallery.js"></script>
+	<script src="/app/controllers/history.js"></script>
+	<script src="/app/controllers/home.js"></script>
+	<script src="/app/controllers/login.js"></script>
+	<script src="/app/controllers/logout.js"></script>
+	<script src="/app/controllers/main.js"></script>
+	<script src="/app/controllers/myAccount.js"></script>
+	<script src="/app/controllers/myAddresses.js"></script>
+	<script src="/app/controllers/products.js"></script>
+	<script src="/app/controllers/productSingle.js"></script>
+	<script src="/app/controllers/promotions.js"></script>
+	<script src="/app/controllers/resetPassword.js"></script>
+	<script src="/app/controllers/lostPassword.js"></script>
+	<script src="/app/controllers/shopCart.js"></script>
+	<script src="/app/controllers/trackOrder.js"></script>
+	<script src="/app/controllers/viewOrder.js"></script>
+	<script src="/app/controllers/wishList.js"></script>
+	<script src="/app/controllers/confirmation.js"></script>
+
+	

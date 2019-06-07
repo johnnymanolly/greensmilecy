@@ -1,0 +1,254 @@
+<style>
+
+    .ingredients{
+        font-size: 12px;
+        color: #6a666a;
+    }
+
+    .table-shopping-cart .column-1 {
+        width: 150px;
+    }
+
+    .table-shopping-cart .table_row .column-2 {
+        font-family: Lato-Bold;
+        font-size: 18px;
+        color: #333;
+        line-height: 1.6;
+    }
+
+</style>
+
+<!-- content page -->
+<div class="bg0 p-tb-50">
+	<div class="container">
+		<div class="size-a-1 flex-col-c-m p-b-70">
+			<div class="txt-center txt-m-201 cl10 how-pos1-parent m-b-14">
+				Flower Shop
+				<div class="how-pos1">
+					<img src="images/serving-dish.png" alt="IMG">
+				</div>
+			</div>
+
+			<h3 class="txt-center txt-l-101 cl3 respon1">
+				View Order
+			</h3>
+		</div>
+		<div style="margin-top:30px;" class="text-center loading" ng-show="vm.loading"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+		<form ng-show="!vm.loading">
+			<div class="flex-col-l">
+				<span class="txt-m-123 cl3 p-b-18">
+					Order ID : {{vm.orderId}}
+				</span>
+
+                <div class="flex-w flex-m bo-b-1 bocl15 w-full p-tb-18">
+					<span class="size-w-58 txt-m-90 cl3">
+						Order Status : 
+					</span>
+
+                    <span ng-if="vm.orderStatus == 'Confirmed'" style="color:green;font-weight:bold;" class="size-w-59 txt-m-90 cl6">
+						{{vm.orderStatus}}
+					</span>
+
+                    <span ng-if="vm.orderStatus == 'Rejected' || vm.orderStatus == 'Timeout'" style="color:red;font-weight:bold;" class="size-w-59 txt-m-90 cl6">
+						{{vm.orderStatus}}
+					</span>
+
+                    <span ng-if="vm.orderStatus != 'Confirmed' && vm.orderStatus != 'Rejected' && vm.orderStatus != 'Timeout'" class="size-w-59 txt-m-90 cl6">
+						<i class="fa fa-spinner fa-spin fa-1x"></i><span style="color:red;"> Waiting for confirmation.. </span>
+					</span>
+
+                    <span ng-if="vm.comments" class="size-w-58 txt-m-90 cl3">
+						Rejection comments :
+					</span>
+
+                    <span ng-if="vm.comments" class="size-w-59 txt-m-90 cl6">
+						{{vm.comments}}
+					</span>
+
+                    <span class="size-w-58 txt-m-90 cl3">
+						Payment Method : 
+					</span>
+
+                    <span class="size-w-59 txt-m-90 cl6">
+						{{vm.payment_method}}
+					</span>
+
+                    <span class="size-w-58 txt-m-90 cl3">
+						Order Type :
+					</span>
+
+                    <span class="size-w-59 txt-m-90 cl6">
+						{{vm.orderType}}
+					</span>
+                </div>
+
+                <div class="flex-w flex-m bo-b-1 bocl15 w-full p-tb-18">
+					<span class="size-w-58 txt-m-90 cl3">
+						Ordered Date : 
+					</span>
+
+                    <span class="size-w-59 txt-m-90 cl6">
+						{{vm.orderedDate}}
+					</span>
+
+                    <span class="size-w-58 txt-m-90 cl3">
+						Delivery Date : 
+					</span>
+
+                    <span class="size-w-59 txt-m-90 cl6">
+						{{vm.deliveryDate}}
+					</span>
+                </div>
+
+                <div class="flex-w flex-m bo-b-1 bocl15 w-full p-tb-18 m-b-10">
+					<span class="size-w-58 txt-m-90 cl3">
+						Full Name :
+					</span>
+
+                    <span class="size-w-59 txt-m-90 cl6">
+						{{vm.fullName}}
+					</span>
+
+                    <span class="size-w-58 txt-m-90 cl3">
+						Phone Number :
+					</span>
+
+                    <span class="size-w-59 txt-m-90 cl6">
+						{{vm.number}}
+					</span>
+
+                    <span ng-if="vm.address" class="size-w-58 txt-m-90 cl3">
+						Address :
+					</span>
+
+                    <span ng-if="vm.address" class="size-w-59 txt-m-90 cl6">
+						{{vm.address}}
+					</span>
+                </div>
+
+            </div>
+            <div class="wrap-table-shopping-cart">
+                <table class="table-shopping-cart">
+                    <tr class="table_head bg12">
+                        <th class="column-1 p-l-30">Product</th>
+                        <th class="column-2"></th>
+                        <th class="column-5">Price</th>
+                        <th class="column-5">Quantity</th>
+                        <th ng-if="vm.orderStatus == 'Rejected'" class="column-5">Available Quantity</th>
+                        <th class="column-6">Total</th>
+                        <th ng-if="vm.orderStatus == 'Rejected'" class="column-7">Restaurant Comments</th>
+                    </tr>
+
+                    <tr class="table_row" ng-repeat="prod in vm.products track by $index">
+                        <td class="column-1">
+                            <div class="flex-w flex-m">
+                                <div class="wrap-pic-w size-w-50 bo-all-1 bocl12 m-r-30">
+                                    <img id="img_{{prod.key}}" ng-if="prod.image" ng-src="https://web.scriptr.io/apsdb/rest/{{vm.account}}/GetFile?apsws.time={{vm.time}}&apsws.authSig={{vm.authSig}}&apsws.responseType=json&apsws.authMode=simple&apsdb.fileName={{prod.image}}&apsdb.fieldName=attachments&apsdb.documentKey={{prod.key}}&apsdb.store=DefaultStore"/>
+
+                                    <img id="img_{{prod.key}}" ng-if="!prod.image" class="set-product-img-max-height" ng-src="/images/dish256.png"/>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="column-2">
+                            <div>
+                                <div>
+									<span>
+										{{prod.name}}
+									</span>
+                                </div>
+
+                                <div class="ingredients">
+									<span ng-if="prod.ingredients">
+										{{prod.ingredients.toString()}}
+									</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="column-5">
+                            <span>€{{prod.price}}</span>
+                        </td>
+                        <td class="column-5">
+                            <div class="flex-w flex-sb-m">
+								<span>
+									{{prod.quantity}}
+								</span>
+                            </div>
+                        </td>
+                        <td ng-if="vm.orderStatus == 'Rejected'" class="column-4">
+                            <div class="flex-w flex-sb-m">
+								<span ng-if="prod.availableQuantity" style="color:red">
+									{{prod.availableQuantity}}
+								</span>
+                                <span ng-if="!prod.availableQuantity">
+									{{prod.quantity}}
+								</span>
+                            </div>
+                        </td>
+                        <td class="column-5">
+                            <div class="flex-w flex-sb-m">
+								<span>
+									€{{(prod.price * prod.quantity).toFixed(2)}}
+								</span>
+                            </div>
+                        </td>
+                        <td ng-if="vm.orderStatus == 'Rejected'" class="column-4">
+                            <div class="flex-w flex-sb-m">
+								<span ng-if="prod.rejection_comments" style="color:red">
+									{{prod.rejection_comments}}
+								</span>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="flex-col-l p-t-68">
+				<span class="txt-m-123 cl3 p-b-18">
+					CART TOTALS
+				</span>
+
+                <!-- 		<div class="flex-w flex-m bo-b-1 bocl15 w-full p-tb-18">
+                            <span class="size-w-58 txt-m-109 cl3">
+                                Total Items
+                            </span>
+
+                            <span class="size-w-59 txt-m-104 cl6">
+                                {{vm.total_items}}
+                            </span>
+                        </div> -->
+
+
+                <div class="flex-w flex-m bo-b-1 bocl15 w-full p-tb-18">
+					<span class="size-w-58 txt-m-109 cl3">
+						Sub Total
+					</span>
+
+                    <span class="size-w-59 txt-m-104 cl6">
+						€{{vm.sub_total}}
+					</span>
+                </div>
+
+                <div class="flex-w flex-m bo-b-1 bocl15 w-full p-tb-18">
+					<span class="size-w-58 txt-m-109 cl3">
+						Delivery
+					</span>
+
+                    <span class="size-w-59 txt-m-104 cl10">
+						€{{vm.deliveryFee}}
+					</span>
+                </div>
+
+                <div class="flex-w flex-m bo-b-1 bocl15 w-full p-tb-18">
+					<span class="size-w-58 txt-m-109 cl3">
+						Total
+					</span>
+
+                    <span class="size-w-59 txt-m-104 cl10">
+						€{{vm.total_amount}}
+					</span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

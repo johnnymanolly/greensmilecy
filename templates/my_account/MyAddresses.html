@@ -1,0 +1,82 @@
+<style>
+    .ag-ltr .ag-header-cell-resize{
+        background: #a59c95;
+        width: 2px
+    }
+
+    .disabled {
+        border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;
+    }
+    .modal-content{
+        margin-top: 161px;
+    }
+
+    textarea{
+        background-color: #efefef;
+    }
+</style>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<div class="bg0 p-t-50 p-b-50">
+    <div class="container">
+      <div class="size-a-1 flex-col-c-m p-b-70">
+        <div class="txt-center txt-m-201 cl10 how-pos1-parent m-b-14">
+          Flower Shop
+          <div class="how-pos1">
+            <img src="images/serving-dish.png" alt="IMG">
+          </div>
+        </div>
+
+        <h3 class="txt-center txt-l-101 cl3 respon1">
+         My Addresses
+        </h3>
+      </div>
+      
+    <div style="margin-top:30px;" class="text-center loading" ng-show="vm.loading"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+    <div ng-if="!vm.addressesList && !vm.loading" class="tab-pane" id="orders" role="tabpanel">
+      <div class="bo-all-1 bocl15 flex-w flex-sb-m p-rl-30 p-tb-10 p-rl-15-ssm">
+        <div class="flex-t p-tb-8 m-r-30">
+          <img class="m-t-6 m-r-10" src="images/icons/icon-list.png" alt="IMG">
+          <span class="size-w-53 txt-s-101 cl6">
+            No addresses has been added yet.
+          </span>
+        </div>
+
+        <a href="#/addNewAddress" class="flex-c-m txt-s-105 cl0 bg10 size-a-42 hov-btn2 trans-04 p-rl-10 m-tb-8">
+          Add Address
+        </a>
+      </div>
+    </div>
+    <scriptr-grid ng-show="vm.addressesList && !vm.loading"
+              columns-definition='vm.myAddressesColDef' 
+              enable-sorting='true'
+              default-cell-renderer="vm.defaultCellRenderer"   
+              api = 'management/api/clients/getAddresses'
+              api-params='vm.gridParams'
+              add-params='vm.addParams' 
+              cell-editor="agLargeTextCellEditor"     
+              grid-height='calc(100vh - 160px)'
+              on-add-row-click="vm.onAddRowClick"
+              pagination="true"
+              enable-col-resize="true"   
+              suppress-filter='true'
+              add-label="Add New Address"
+              delete-label="Delete Address"
+              cell-editable='true'
+              row-height='30'
+              enable-client-side-filter='false'
+              row-model-type='infinite'
+              row-model-selection='multiple'
+              pagination-page-size='20'
+              enable-delete-row='true'
+              enable-add-row='true'
+              on-format-data="vm.onAddressesLoaded"
+              transport='https'>
+</scriptr-grid>
+
+
+
+  </div>
+</div>
+  

@@ -1,0 +1,543 @@
+
+<div class="bg0 p-t-50 p-b-50">
+		<div class="container">
+			<div class="size-a-1 flex-col-c-m p-b-70">
+				<div class="txt-center txt-m-201 cl10 how-pos1-parent m-b-14">
+					Flower Shop
+					<div class="how-pos1">
+						<img src="images/serving-dish.png" alt="IMG">
+					</div>
+				</div>
+
+				<h3 class="txt-center txt-l-101 cl3 respon1">
+					Place Order
+				</h3>
+			</div>
+			<div class="col-xs-12" id="alert_msg">
+				<div id="alert_msg_content" class="alert">
+				</div>
+			</div>
+			<!-- Login -->
+			<div ng-show="!vm.isLoggedIn">
+				<div class="txt-s-101 txt-center">
+					<span class="cl3">
+						Already a customer?
+					</span>
+
+                <span class="cl10 hov12 js-toggle-panel2">
+						Click here to login
+					</span>
+            </div>
+
+            <div class="how-bor3 p-rl-15 p-tb-28 m-tb-33 dis-none js-panel2">
+                <form class="size-w-60 m-rl-auto">
+                    <p class="txt-s-120 cl9 txt-center p-b-26">
+                        If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the Billing & Shipping section.
+                    </p>
+
+                    <div class="row">
+                        <div class="col-sm-6 p-b-20">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    Username or email <span class="cl12">*</span>
+                                </div>
+
+                                <input ng-model="vm.email" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-15 focus1" type="email" name="email" placeholder="example@abc.xyz" required>
+                                <div>
+								      <span class="inline-error" ng-show="vm.submitted && loggedOutForm.email.$error.email">
+								        Not valid email</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 p-b-20">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    Password <span class="cl12">*</span>
+                                </div>
+
+                                <input ng-model="vm.password" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-15 focus1" type="password" name="password">
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+
+                            <button ng-click="vm.onLogin()" class="flex-c-m txt-s-105 cl0 bg10 size-a-21 hov-btn2 trans-04 p-rl-10" ng-class="(vm.loading) ? 'is-disabled': ''">
+                                <i ng-if="vm.loading" class="fa fa-spinner fa-spin fa-1x loading"></i><span> {{vm.loading ? 'LOADING ..' : 'LOGIN'}}</span>
+                            </button>
+
+                            <a href="#/lostPassword" class="txt-s-101 cl9 hov-cl10 trans-04">
+                                Lost your password?
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div style="margin-top:30px;" class="text-center loading" ng-show="vm.loadingSettings"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+        <div ng-show="!vm.loadingSettings" class="row">
+            <form name="loggedOutForm" ng-if="!vm.isLoggedIn" class="col-md-7 col-lg-8 p-b-50">
+                <div>
+                    <h4 class="txt-m-124 cl3 p-b-28">
+                        Submit Order as guest
+                    </h4>
+
+                    <div class="row p-b-50">
+                        <div class="col-sm-6 p-b-23">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    First Name <span class="cl12">*</span>
+                                </div>
+
+                                <input ng-model="vm.firstName" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="first-name">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 p-b-23">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    Last Name <span class="cl12">*</span>
+                                </div>
+
+                                <input ng-model="vm.lastName" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="last-name">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 p-b-23">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    Phone <span class="cl12">*</span>
+                                </div>
+
+                                <input ng-model="vm.number" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="phone">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 p-b-23">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    Email Address <span class="cl12">*</span>
+                                </div>
+
+                                <input ng-model="vm.email" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="email" name="email" placeholder="example@abc.xyz" required>
+                                <div>
+								      <span class="inline-error" ng-show="vm.submitted && loggedOutForm.email.$error.email">
+								        Not valid email.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 p-b-23">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    Company Name
+                                </div>
+
+                                <input ng-model="vm.company" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="company-name">
+                            </div>
+                        </div>
+
+                        <div ng-if="vm.type == 'delivery'" class="col-12">
+                            <div class="p-b-23">
+                                <div>
+                                    <div class="txt-s-101 cl6 p-b-10">
+                                        Address <span class="cl12">*</span>
+                                    </div>
+
+                                    <input ng-model="vm.street" class="plh2 txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1 m-b-20" type="text" name="street" placeholder="Street address">
+
+                                    <input ng-model="vm.street_number" class="plh2 txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1 m-b-20" type="number" name="street" placeholder="Street Number">
+
+                                    <input ng-model="vm.building" class="plh2 txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="add" placeholder="Apartment, suite, unit etc. (optional)">
+                                </div>
+                            </div>
+
+                            <div class="p-b-23">
+                                <div>
+                                    <div class="txt-s-101 cl6 p-b-10">
+                                        Town/City <span class="cl12">*</span>
+                                    </div>
+
+                                    <input ng-model="vm.city" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="city">
+                                </div>
+                            </div>
+
+                            <div class="p-b-23">
+                                <div>
+                                    <div class="txt-s-101 cl6 p-b-10">
+                                        Postcode / Zip <span class="cl12">*</span>
+                                    </div>
+
+                                    <input ng-model="vm.postalCode" minlength="4" maxlength="4" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="postcode">
+                                    <div>
+									      <span class="inline-error" ng-show="!vm.postalCodeValid">
+									        This postal code is not available for delivery</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-12 p-b-23">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    Apply Coupon
+                                </div>
+
+                                <input ng-model="vm.coupon" class="bo-all-1 bocl15 focus1 size-a-37 txt-s-120 cl3 plh2 p-rl-20 w-full-sm" type="text" name="coupon" placeholder="Coupon code">
+                            </div>
+                        </div>
+
+                        <div class="col-12 p-t-17 p-b-70">
+                            <div class="txt-s-101 txt-center">
+									<span class="cl3">
+										Schedule your order?
+									</span>
+
+                                <span class="cl10 hov12 js-toggle-panel1">
+										Click here to schedule your code
+									</span>
+                            </div>
+
+                            <div class="m-t-35 dis-none js-panel1">
+                                <div class="size-w-60 flex-w m-rl-auto">
+                                    <input id="datepicker_logged_out" class="bo-all-1 bocl15 focus1 size-a-37 txt-s-120 cl3 plh2 p-rl-20 w-full-sm" type="text" name="date" placeholder="Choose Date">
+                                    <input id="timepicker_logged_out" class="bo-all-1 bocl15 focus1 size-a-37 txt-s-120 cl3 plh2 p-rl-20 w-full-sm" type="text" name="time" placeholder="Choose Time">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <h4 class="txt-m-124 cl3 p-b-19">
+                        Additional information
+                    </h4>
+
+                    <div>
+                        <div class="txt-s-101 cl6 p-b-10">
+                            Order notes
+                        </div>
+
+                        <textarea ng-model="vm.additionalInformation" class="plh2 txt-s-120 cl3 size-a-38 bo-all-1 bocl15 p-rl-20 p-tb-10 focus1" name="note" placeholder="Note about your order, eg. special notes for delivery."></textarea>
+                    </div>
+                </div>
+            </form>
+
+            <div ng-show="vm.isLoggedIn" class="col-md-7 col-lg-8 p-b-50">
+                <div>
+                    <h4 class="txt-m-124 cl3 p-b-28">
+                        BILLING DETAILS
+                    </h4>
+
+                    <div class="row p-b-50">
+
+                        <div class="col-sm-6 p-b-23">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    First Name <span class="cl12">*</span>
+                                </div>
+
+                                <input ng-model="vm.firstName" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="first-name">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 p-b-23">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    Last Name <span class="cl12">*</span>
+                                </div>
+
+                                <input ng-model="vm.lastName" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="last-name">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 p-b-23">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    Phone <span class="cl12">*</span>
+                                </div>
+
+                                <input ng-model="vm.number" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="phone">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 p-b-23">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    Email Address <span class="cl12">*</span>
+                                </div>
+
+                                <input ng-model="vm.email" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="email" name="email" placeholder="example@abc.xyz" required>
+                                <div>
+								      <span class="inline-error" ng-show="vm.submitted && loggedOutForm.email.$error.email">
+								        Not valid email.</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-12 p-b-23">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    Company Name
+                                </div>
+
+                                <input ng-model="vm.company" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="company-name">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 p-b-23">
+                            <div>
+                                <div class="txt-s-101 cl6 p-b-10">
+                                    Apply Coupon
+                                </div>
+
+                                <input ng-model="vm.coupon" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="coupon" placeholder="Coupon code">
+                            </div>
+                        </div>
+
+                        <div ng-if="vm.type == 'delivery'" class="col-12">
+                            <div class="p-b-23">
+                                <div>
+                                    <div class="txt-s-101 cl6 p-b-10">
+                                        Select Address <span class="cl12">*</span>
+                                    </div>
+
+                                    <div class="rs1-select2 rs2-select2 bg0 w-full bo-all-1 bocl15 m-tb-7 m-r-15">
+                                        <select id="addresses_list" class="js-select2" name="address" ng-model="vm.address" ng-change="vm.onAddressSelect(vm.address)">
+                                            <option value="new">Add new address</option>
+                                            <option selected="selected" value="{{address}}" ng-repeat="address in vm.addresses track by $index">{{address.street}} {{address.street_number}} {{address.building}} {{address.postalCode}} {{address.city}}</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div ng-if="vm.new_address"  class="">
+                                <div class="p-b-23">
+                                    <div>
+                                        <div class="txt-s-101 cl6 p-b-10">
+                                            Address <span class="cl12">*</span>
+                                        </div>
+
+                                        <input ng-model="vm.street" class="plh2 txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1 m-b-20" type="text" name="street" placeholder="Street address">
+
+                                        <input ng-model="vm.street_number" class="plh2 txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1 m-b-20" type="number" name="street" placeholder="Street Number">
+
+                                        <input ng-model="vm.building" class="plh2 txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="add" placeholder="Apartment, suite, unit etc. (optional)">
+                                    </div>
+                                </div>
+
+                                <div class="p-b-23">
+                                    <div>
+                                        <div class="txt-s-101 cl6 p-b-10">
+                                            Town/City <span class="cl12">*</span>
+                                        </div>
+
+                                        <input ng-model="vm.city" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="city">
+                                    </div>
+                                </div>
+
+                                <div class="p-b-23">
+                                    <div>
+                                        <div class="txt-s-101 cl6 p-b-10">
+                                            Postcode / Zip <span class="cl12">*</span>
+                                        </div>
+
+                                        <input ng-model="vm.postalCode" minlength="4" maxlength="4" class="txt-s-120 cl3 size-a-21 bo-all-1 bocl15 p-rl-20 focus1" type="text" name="postcode">
+                                        <div>
+										      <span class="inline-error" ng-show="!vm.postalCodeValid">
+										        This postal code is not available for delivery</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="p-t-17 p-b-70">
+                        <div class="txt-s-101 txt-center">
+								<span class="cl3">
+									Schedule your order?
+								</span>
+
+                            <span class="cl10 hov12 js-toggle-panel1">
+									Click here to schedule your code
+								</span>
+                        </div>
+
+                        <div class="m-t-35 dis-none js-panel1">
+                            <div class="size-w-60 flex-w m-rl-auto">
+                                <input id="datepicker_logged_in" class="bo-all-1 bocl15 focus1 size-a-37 txt-s-120 cl3 plh2 p-rl-20 w-full-sm" type="text" name="date" placeholder="Choose Date">
+                                <input id="timepicker_logged_in" class="bo-all-1 bocl15 focus1 size-a-37 txt-s-120 cl3 plh2 p-rl-20 w-full-sm" type="text" name="time" placeholder="Choose Time">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="txt-m-124 cl3 p-b-19">
+                        Additional information
+                    </h4>
+
+                    <div>
+                        <div class="txt-s-101 cl6 p-b-10">
+                            Order notes
+                        </div>
+
+                        <textarea ng-model="vm.additionalInformation" class="plh2 txt-s-120 cl3 size-a-38 bo-all-1 bocl15 p-rl-20 p-tb-10 focus1" name="note" placeholder="Note about your order, eg. special notes for delivery."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 col-lg-4 p-b-50">
+                <div class="how-bor4 p-t-35 p-b-40 p-rl-30 m-t-5">
+                    <h4 class="txt-m-124 cl3 p-b-11">
+                        Your order
+                    </h4>
+
+                    <div class="flex-w flex-sb-m txt-m-103 cl6 bo-b-1 bocl15 p-b-21 p-t-18">
+							<span class="bold">
+								Products
+							</span>
+
+                        <span class="bold">
+								Total
+							</span>
+                    </div>
+
+                    <!--  -->
+                    <div class="set-prod-list-height">
+                        <div class="flex-w flex-sb-m txt-s-101 cl6 bo-b-1 bocl15 p-b-13 p-t-13" ng-repeat="prod in vm.my_basket_products_array track by $index">
+								<span title="{{prod.name}}" class="checkout-items-list">
+									{{prod.name}}
+								</span>
+                            <img class="m-rl-3" src="images/icons/icon-multiply.png" alt="icon"/>
+                            <span style="color:red">{{prod.quantity}}</span>
+
+
+                            <span class="m-l-10">
+									<span class="cl10">€{{(prod.portion && prod.portion == 'half') ? (prod.halfPortionPrice * prod.quantity).toFixed(2) : (prod.price * prod.quantity).toFixed(2)}}</span>
+								</span>
+                        </div>
+                    </div>
+
+
+                    <!--  -->
+                    <div class="flex-w flex-m txt-m-103 bo-b-1 bocl15 p-tb-23">
+							<span class="size-w-61 cl6 bold">
+								Total Items
+							</span>
+
+                        <span class="size-w-62 cl9">
+								{{vm.items_counter}}
+							</span>
+                    </div>
+
+                    <div class="flex-w flex-m txt-m-103 bo-b-1 bocl15 p-tb-23">
+							<span class="size-w-61 cl6 bold">
+								Sub Total
+							</span>
+
+                        <span class="size-w-62 cl9">
+								€{{(vm.total_amount).toFixed(2)}}
+							</span>
+                    </div>
+
+                    <div class="flex-w flex-m txt-m-103 bo-b-1 bocl15 p-tb-23">
+							<span class="size-w-61 cl6 bold">
+								Delivery Fee
+							</span>
+
+                        <span class="size-w-62 cl9">
+								€{{vm.deliveryFee}}
+							</span>
+                    </div>
+
+                    <div class="flex-w flex-m txt-m-103 p-tb-23">
+							<span class="size-w-61 cl6 bold">
+								Total Amount
+							</span>
+
+                        <span class="size-w-62 cl10">
+								€{{(vm.total_amount + vm.deliveryFee).toFixed(2)}}
+							</span>
+                    </div>
+
+                    <div class="bo-all-1 bocl15 p-b-25 m-b-30">
+
+                        <div ng-if="vm.deliveryEnabled" class="flex-w flex-m bo-b-1 bocl15 p-rl-20 p-tb-16">
+                            <input class="m-r-15" id="type_delivery" type="radio" name="type" value="delivery" checked="checked" ng-model="vm.type">
+                            <label class="txt-m-103 cl6" for="type_delivery">
+                                Delivery
+                            </label>
+                            <span ng-if="vm.deliveryTime" class="m-l-5"> ({{vm.deliveryTime - 5}} - {{vm.deliveryTime + 5}} minutes)</span>
+                        </div>
+
+                        <div ng-if="vm.takeawayEnabled" class="flex-w flex-m p-rl-20 p-t-17 p-b-10">
+                            <input class="m-r-15" id="type_takeaway" type="radio" name="type" value="takeaway" ng-model="vm.type">
+                            <label class="txt-m-103 cl6" for="type_takeaway">
+                                Take away
+                            </label>
+                            <span ng-if="vm.takeawayTime" class="m-l-5"> ({{vm.takeawayTime - 5}} - {{vm.takeawayTime + 5}} minutes)</span>
+                        </div>
+
+                    </div>
+
+                    <div class="bo-all-1 bocl15 p-b-25 m-b-30">
+
+                        <div class="flex-w flex-m bo-b-1 bocl15 p-rl-20 p-tb-16">
+                            <input class="m-r-15" id="radio1" type="radio" name="pay" value="cash" ng-checked="true" ng-model="vm.paymentMethod">
+                            <label class="txt-m-103 cl6" for="radio1">
+                                Cash
+                            </label>
+                        </div>
+
+                        <!-- <div class="content-payment bo-b-1 bocl15 p-rl-20 p-tb-15">
+                            <p class="txt-s-120 cl9">
+                                Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.
+                            </p>
+                        </div> -->
+
+                        <div ng-if="vm.onlinePayment" class="flex-w flex-m p-rl-20 p-t-17 p-b-10">
+                            <input class="m-r-15" id="radio2" type="radio" name="pay" value="creditcard" ng-model="vm.paymentMethod">
+                            <label class="txt-m-103 cl6" for="radio2">
+                                Pay Online
+                            </label>
+
+                            <div class="w-full p-l-29 p-t-16">
+                                <a href="#"><img src="images/icons/icon-pay-01.png" alt="IMG"></a>
+                                <a href="#"><img src="images/icons/icon-pay-03.png" alt="IMG"></a>
+                            </div>
+                        </div>
+
+                        <div class="content-paypal bo-tb-1 bocl15 p-rl-20 p-tb-15 m-tb-10 dis-none">
+                            <p class="txt-s-120 cl9">
+                                Pay Online; you can pay with your credit card..
+                            </p>
+                        </div>
+
+                        <!-- 	<div class="p-l-49">
+                                <a href="#" class="txt-s-120 cl6 hov-cl10 trans-04 p-t-10">
+                                    What is paypal?
+                                </a>
+                            </div>	 -->
+                    </div>
+
+
+
+                    <button ng-click="vm.sendOrder();vm.submitted=true;" class="flex-c-m txt-s-105 cl0 bg10 size-a-21 hov-btn2 trans-04 p-rl-10" ng-class="(vm.loading) ? 'is-disabled': ''">
+                        <i ng-if="vm.loading" class="fa fa-spinner fa-spin fa-1x loading"></i>
+                        <span> {{vm.loading ? 'LOADING ..' : 'Place order'}}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,124 @@
+
+<style>
+    .ag-ltr .ag-header-cell-resize{
+        background: #a59c95;
+        width: 2px
+    }
+
+    .disabled {
+        border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;
+    }
+    .modal-content{
+        margin-top: 161px;
+    }
+
+    textarea{
+        background-color: #efefef;
+    }
+</style>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<div class="bg0 p-t-50 p-b-50">
+    <div class="container">
+      <div class="size-a-1 flex-col-c-m p-b-70">
+        <div class="txt-center txt-m-201 cl10 how-pos1-parent m-b-14">
+          Flower Shop
+          <div class="how-pos1">
+            <img src="images/serving-dish.png" alt="IMG">
+          </div>
+        </div>
+
+        <h3 class="txt-center txt-l-101 cl3 respon1">
+          Order Status
+        </h3>
+      </div>
+      
+    <div style="margin-top:30px;" class="text-center loading" ng-show="vm.loading"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+   
+    <div  ng-show="!vm.loading" class="tab-pane" id="orders" role="tabpanel">
+      <div id="alert_msg">
+        <div id="alert_msg_content" class="alert">
+        </div>
+      </div>
+      <div class="bo-all-1 bocl15 flex-w flex-sb-m p-rl-30 p-tb-10 p-rl-15-ssm">
+        <div class="flex-t p-tb-8 m-r-30">
+          <i ng-if="!vm.confirmed" class="fa fa-spinner fa-spin fa-1x m-t-5 m-r-5"></i>
+          <img ng-if="vm.confirmed" class="m-t-6 m-r-10" src="images/icons/icon-list.png" alt="IMG">
+          <span ng-if="vm.confirmed" class="size-w-53 txt-s-101 cl6">
+            Your order is confirmed!
+          </span>
+                    <span ng-if="vm.rejected" class="size-w-53 txt-s-101 cl6">
+            We are sorry but your order is rejected.
+            <br>
+            <span>{{vm.comments}}</span>
+          </span>
+                    <span ng-if="!vm.confirmed && !vm.rejected" class="size-w-53 txt-s-101 cl6">
+            </i><span style="color:red;"> Waiting for confirmation.. </span>
+            <span>Your order will be processed shorlty.</span>
+                        <!--span>(Maximum time is {{vm.deliveryTimeout}} minutes)</span-->
+            <span ng-if="vm.orderType == 'delivery'">
+              <br>
+              <br>
+              You're order will be sent to :
+              <br>
+              {{vm.address}}
+            </span>
+
+          </span>
+                </div>
+
+        <a href="" ng-click="vm.viewOrder()" class="flex-c-m txt-s-105 cl0 bg10 size-a-42 hov-btn2 trans-04 p-rl-10 m-tb-8">
+          View Order
+        </a>
+      </div>
+    </div>
+
+      <div ng-show="vm.rejected && vm.editedRows.length > 0" class="wrap-table-shopping-cart m-t-50">
+        <table class="table-shopping-cart">
+          <tr class="table_head bg12">
+            <th class="column-1 p-l-30">Product</th>
+            <!--  <th class="column-2">Category</th> -->
+            <th class="column-3">Quantity</th>
+            <th class="column-4">Avaliable Quantity</th>
+          </tr>
+
+          <tr class="table_row" ng-repeat="prod in vm.editedRows track by $index">
+            <td class="column-1">
+              <div class="flex-w flex-m">
+                <div class="wrap-pic-w size-w-50 bo-all-1 bocl12 m-r-30">
+
+                  <img id="img_{{prod.key}}_{{prod.image}}" ng-if="prod.image" ng-src="https://web.scriptr.io/apsdb/rest/{{vm.account}}/GetFile?apsws.time={{vm.time}}&apsws.authSig={{vm.authSig}}&apsws.responseType=json&apsws.authMode=simple&apsdb.fileName={{prod.image}}&apsdb.fieldName=attachments&apsdb.documentKey={{prod.key}}&apsdb.store=DefaultStore"/>
+
+                  <img id="img_{{prod.key}}" ng-if="!prod.image" class="set-product-img-max-height" ng-src="/images/dish256.png"/>
+                </div>
+                <span class="m-l-33">
+                  {{prod.name}}
+                </span>
+              </div>
+            </td>
+            <!--  <td class="column-2">
+               {{prod.subCategory}}
+             </td> -->
+            <td class="column-3">
+              <div class="flex-w flex-sb-m">
+                <span>
+                  {{prod.quantity}}
+                </span>
+              </div>
+            </td>
+            <td class="column-4">
+              <div class="flex-w flex-sb-m">
+                <span style="color:red">
+                  {{prod.availableQuantity}}
+                </span>
+              </div>
+            </td>
+          </tr>
+
+        </table>
+      </div>
+
+    </div>
+</div>
+

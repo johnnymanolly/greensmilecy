@@ -1,0 +1,563 @@
+
+<style type="text/css">
+
+	.flex-sb-m-override {
+		justify-content: unset;
+		align-items: center;
+	}
+
+	.item-div {
+		height: 355px;
+	}
+
+	.item-div > img {
+		padding: 26px;
+	}
+
+	.item-grid-div {
+		height: 268px;
+	}
+
+	.block1-wrap-icon {
+		bottom: 50px;
+	}
+
+	.item-grid-div > img {
+		padding: 26px;
+	}
+
+	.block1-content {
+		bottom: -33px;
+	}
+
+	/*.wrap-num-product {
+	    width: 100%;
+	}*/
+
+	.m-r-10 {
+		margin-right: 10px
+	}
+	.p-t-15 {
+		padding-top: 13px;
+	}
+
+	.set-product-img-max-height{
+		height: 223px!important;
+	}
+
+	.rm-mg
+	{
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+
+	.rm-pl
+	{
+		padding-right: 0px;
+		padding-left: 0px;
+	}
+
+	.btm-border{
+		border-bottom: 2px solid #f5f5f5;
+	}
+
+	.modal-header {
+		display: block;
+	}
+
+	.radio-btn{
+		display: flex;
+		align-items: center;
+	}
+
+	.item-name-grid{
+		overflow: hidden;
+		text-overflow: ellipsis;
+		/* white-space: nowrap; */
+		width: 100%;
+		max-height: 63px;
+		padding-left: 7px;
+		padding-right: 7px;
+		text-align: center;
+	}
+
+	.item-name-list{
+		overflow: hidden;
+		text-overflow: ellipsis;
+		/* white-space: nowrap; */
+		width: 100%;
+		max-height: 63px;
+	}
+
+	.description-list{
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 100%;
+	}
+
+
+</style>
+
+<section ng-show="vm.categories" class="how-overlay2 bg-img1" style="background-image: url({{vm.titleImage || 'images/shops_title_image.jpg'}});">
+	<div class="container">
+		<div class="txt-center p-t-160 p-b-165">
+			<h3 class="txt-l-101 cl0 txt-center p-b-14 respon1">
+				Flower Shop
+			</h3>
+
+			<span class="txt-m-201 cl0 flex-c-m flex-w m-t-10">
+				<a href="#/gallery" class="txt-m-201 cl0 hov-cl10 trans-04 m-r-6">
+					Menu
+				</a>
+
+				<span>
+					/ {{vm.selectedSubCat}}
+				</span>
+			</span>
+		</div>
+	</div>
+</section>
+
+<!-- Content page -->
+<section class="bg0 p-t-50 p-b-45">
+	<div class="container">
+		<div class="size-a-1 flex-col-c-m p-b-70">
+			<div class="txt-center txt-m-201 cl10 how-pos1-parent m-b-14">
+				Flower Shop
+
+				<div class="how-pos1">
+					<img src="images/serving-dish.png" alt="IMG">
+				</div>
+			</div>
+
+			<h3 class="txt-center txt-l-101 cl3 respon1">
+				{{vm.selectedSubCat}}
+			</h3>
+		</div>
+		<div ng-show="vm.categories && vm.categories.length > 1" class="flex-w flex-c-m filter-tope-group p-b-47">
+			<button ng-click="vm.onCategoryClicked('all')" class="txt-m-104 cl9 hov2 trans-04 p-rl-22 p-b-10" data-filter="*">
+				All
+			</button>
+
+			<button ng-click="vm.onCategoryClicked(cat)" class="txt-m-104 cl9 hov2 trans-04 p-rl-22 p-b-10" ng-class="vm.catKey == cat.key ? ' how-active1' : ''" data-filter=".{{cat.name}}-fill" ng-repeat="cat in vm.categories track by $index">
+				{{cat.name}}
+			</button>
+
+		</div>
+		<div class="row">
+			<div class="col-sm-10 col-md-4 col-lg-3 m-rl-auto p-b-50">
+				<div class="leftbar p-t-15">
+					<!--  -->
+					<div class="size-a-21 pos-relative">
+						<input ng-keyup="$event.keyCode == 13 ? vm.searchProduct(vm.searchValue) : null" ng-model="vm.searchValue" class="s-full bo-all-1 bocl15 p-rl-20" type="text" name="search" placeholder="Search products...">
+						<button ng-click="vm.searchProduct(vm.searchValue)" class="flex-c-m fs-18 size-a-22 ab-t-r hov11">
+							<img class="hov11-child trans-04" src="./images/icons/icon-search.png" alt="ICON">
+						</button>
+					</div>
+
+					<!--  -->
+					<div class="p-t-45">
+						<h4 class="txt-m-101 cl3">
+							FILTER BY PRICE
+						</h4>
+
+						<div class="filter-price p-t-32">
+							<div class="wra-filter-bar">
+								<div id="filter-bar"></div>
+							</div>
+
+							<div class="flex-sb-m flex-w p-t-16">
+								<div class="txt-s-115 cl9 p-t-10 p-b-10 m-r-20">
+									Price: €<span id="value-lower">0</span> - €<span id="value-upper">15</span>
+								</div>
+
+								<div>
+									<a href="javascript:void(0)" ng-click="vm.filterProductByPrice()" class="txt-s-107 cl6 hov-cl10 trans-04">
+										Filter
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--  -->
+					<div class="p-t-40">
+						<h4 class="txt-m-101 cl3 p-b-37">
+							Categories
+						</h4>
+
+						<ul>
+							<li class="p-b-5" ng-repeat="cat in vm.categories track by $index">
+								<label class="flex-sb-m-override flex-w txt-s-101 cl6 hov-cl10 trans-04 p-tb-3 pointer">
+									<input ng-click="vm.onFilterClicked()" class="pointer " type="checkbox" checklist-model="vm.filteredSubCats.cats" checklist-value="cat.name">
+									<span class="set-radio-label">{{cat.name}}</span>
+								</label>
+							</li>
+						</ul>
+					</div>
+
+					<!--  -->
+					<!--div class="p-t-40">
+						<h4 class="txt-m-101 cl3 p-b-37">
+							Best sellers
+						</h4>
+
+						<ul>
+							<li class="flex-w flex-sb-t p-b-30">
+								<a href="javascript:void(0)" class="size-w-50 wrap-pic-w bo-all-1 bocl12 hov8 trans-04">
+									<img src="./images/best-sell-01.jpg" alt="IMG">
+								</a>
+
+								<div class="size-w-51 flex-col-l p-t-12">
+									<a href="javascript:void(0)" class="txt-m-103 cl3 hov-cl10 trans-04 p-b-12">
+										Cheery
+									</a>
+
+									<span class="txt-m-104 cl9">
+										30$
+									</span>
+								</div>
+							</li>
+
+							<li class="flex-w flex-sb-t p-b-30">
+								<a href="javascript:void(0)" class="size-w-50 wrap-pic-w bo-all-1 bocl12 hov8 trans-04">
+									<img src="./images/best-sell-02.jpg" alt="IMG">
+								</a>
+
+								<div class="size-w-51 flex-col-l p-t-12">
+									<a href="javascript:void(0)" class="txt-m-103 cl3 hov-cl10 trans-04 p-b-12">
+										Asparagus
+									</a>
+
+									<span class="txt-m-104 cl9">
+										12$
+									</span>
+								</div>
+							</li>
+
+							<li class="flex-w flex-sb-t p-b-30">
+								<a href="javascript:void(0)" class="size-w-50 wrap-pic-w bo-all-1 bocl12 hov8 trans-04">
+									<img src="./images/best-sell-03.jpg" alt="IMG">
+								</a>
+
+								<div class="size-w-51 flex-col-l p-t-12">
+									<a href="javascript:void(0)" class="txt-m-103 cl3 hov-cl10 trans-04 p-b-12">
+										Eggplant
+									</a>
+
+									<span class="txt-m-104 cl9">
+										18$
+									</span>
+								</div>
+							</li>
+
+							<li class="flex-w flex-sb-t p-b-30">
+								<a href="javascript:void(0)" class="size-w-50 wrap-pic-w bo-all-1 bocl12 hov8 trans-04">
+									<img src="./images/best-sell-04.jpg" alt="IMG">
+								</a>
+
+								<div class="size-w-51 flex-col-l p-t-12">
+									<a href="javascript:void(0)" class="txt-m-103 cl3 hov-cl10 trans-04 p-b-12">
+										Carrot
+									</a>
+
+									<span class="txt-m-104 cl9">
+										17$
+									</span>
+								</div>
+							</li>
+						</ul>
+					</div-->
+
+					<!--  -->
+					<!--div class="p-t-25">
+						<h4 class="txt-m-101 cl3 p-b-37">
+							Search by tags
+						</h4>
+
+						<div class="flex-w m-r--10">
+							<a href="javascript:void(0)" class="dis-block bg12 txt-s-101 cl6 hov-btn1 trans-03 p-tb-5 p-rl-12 m-r-10 m-b-10">
+								Food
+							</a>
+
+							<a href="javascript:void(0)" class="dis-block bg12 txt-s-101 cl6 hov-btn1 trans-03 p-tb-5 p-rl-12 m-r-10 m-b-10">
+								Green
+							</a>
+
+							<a href="javascript:void(0)" class="dis-block bg12 txt-s-101 cl6 hov-btn1 trans-03 p-tb-5 p-rl-12 m-r-10 m-b-10">
+								Vegetables
+							</a>
+
+							<a href="javascript:void(0)" class="dis-block bg12 txt-s-101 cl6 hov-btn1 trans-03 p-tb-5 p-rl-12 m-r-10 m-b-10">
+								Organic
+							</a>
+
+							<a href="javascript:void(0)" class="dis-block bg12 txt-s-101 cl6 hov-btn1 trans-03 p-tb-5 p-rl-12 m-r-10 m-b-10">
+								Farm
+							</a>
+						</div>
+					</div-->
+				</div>
+			</div>
+
+			<div id="productsId" class="col-sm-10 col-md-8 col-lg-9 m-rl-auto p-b-50">
+				<div>
+					<div class="flex-w flex-r-m p-b-45 flex-row-rev">
+						<div class="flex-w flex-m p-tb-8">
+							<div class="rs1-select2 bg0 size-w-52 bo-all-1 bocl15 m-tb-7 m-r-15">
+								<select class="js-select2 select2-hidden-accessible" name="sort" tabindex="-1" aria-hidden="true" ng-model="vm.sort_type" ng-change="vm.onSortProducts()">
+									<option value="">Latest</option>
+									<option value="price<numeric:ASC>">Price (Low to High)</option>
+									<option value="price<numeric:DESC>">Price (High to Low)</option>
+									<option value="name<string:ASC>">Sort By Name</option>
+								</select>
+								<div class="dropDownSelect2"></div>
+							</div>
+
+							<div ng-hide="vm.hidePhotos == 'true'" class="flex-w flex-m m-tb-7">
+								<button class="dis-block lh-00 pos-relative how-icon1 m-r-15 js-show-list" ng-click="vm.listMode = true;vm.gridMode = false;">
+									<img class="icon-main trans-04" src="./images/icons/icon-menu-list.png" alt="ICON">
+									<img class="ab-t-l icon-hov trans-04" src="./images/icons/icon-menu-list1.png" alt="ICON">
+								</button>
+
+								<button class="dis-block lh-00 pos-relative how-icon1 js-show-grid" ng-click="vm.listMode = false;vm.gridMode = true;">
+									<img class="icon-main trans-04" src="./images/icons/icon-grid.png" alt="ICON">
+									<img class="ab-t-l icon-hov trans-04" src="./images/icons/icon-grid1.png" alt="ICON">
+								</button>
+							</div>
+						</div>
+
+						<span class="txt-s-101 cl9 m-r-30 size-w-53">
+							Showing {{vm.fromProductNumber}} – {{vm.toProductNumber}} of {{vm.productsCount}} results
+						</span>
+					</div>
+					<div class="text-center loading" ng-show="!vm.products"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+					<p ng-if="vm.products.length == 0" class="no-products">No Items Found.</p>
+					<!-- Shop grid -->
+					<div ng-class="vm.hidePhotos == 'true' ? 'dis-none' : ''" class="shop-grid">
+						<div class="row">
+							<!-- - -->
+							<div class="col-sm-6 col-lg-4 p-b-30 cursor" ng-repeat="product in vm.products track by $index">
+								<!-- Block1 -->
+								<div class="block1">
+									<div class="block1-bg wrap-pic-w bo-all-1 bocl12 hov3 trans-04 item-div">
+										<img id="img_{{product.key}}" ng-if="product.image" ng-click="vm.showItemDesc(product.key)" class="set-product-img-max-height" ng-src="https://web.scriptr.io/apsdb/rest/{{vm.account}}/GetFile?apsws.time={{vm.time}}&apsws.authSig={{vm.authSig}}&apsws.responseType=json&apsws.authMode=simple&apsdb.fileName={{product.image}}&apsdb.fieldName=attachments&apsdb.documentKey={{product.key}}&apsdb.store=DefaultStore"/>
+
+										<img id="img_{{product.key}}" ng-if="!product.image" ng-click="vm.showItemDesc(product.key)" class="set-product-img-max-height" ng-src="/images/dish256.png"/>
+
+										<div class="block1-content flex-col-c-m p-b-60">
+											<a href="#/productSingle?key={{product.key}}" class="item-name-grid txt-m-103 cl3 txt-center hov-cl10 trans-04 js-name1">
+												{{product.name}}
+											</a>
+
+											<span class="block1-content-more txt-m-104 cl9 p-t-13 trans-04">
+												<span ng-if="!product.priceOffer" style="color:#81b03f;">€{{product.price}}</span>
+												<s ng-if="product.priceOffer" style="color:red;"> €{{product.price}}</s>
+												<span ng-if="product.priceOffer" style="color:#81b03f;"> €{{product.priceOffer}}</span>
+												<span ng-if="product.unit"> / {{product.unit}}</span>
+											</span>
+
+											<span ng-if="product.default_ingredients || product.description" class="block1-content-more txt-s-101 cl9 p-t-10 trans-04 set-unit-length">
+												{{product.default_ingredients.toString() || product.description}}
+											</span>
+
+											<!--span ng-if="!product.default_ingredients && !product.description && product.unit" class="block1-content-more txt-m-104 cl9 p-t-10 trans-04 set-unit-length">
+												{{product.unit}}
+											</span-->
+
+											<div class="block1-wrap-icon flex-c-m flex-w trans-05">
+												<a href="#/productSingle?key={{product.key}}" class="block1-icon flex-c-m wrap-pic-max-w">
+													<img src="./images/icons/icon-view.png" alt="ICON">
+												</a>
+
+												<!--a href="javascript:void(0)" class="block1-icon flex-c-m wrap-pic-max-w js-addcart-b1">
+													<img src="./images/icons/icon-cart.png" alt="ICON">
+												</a-->
+
+												<a ng-show="vm.isLoggedIn == true" href="javascript:void(0)" ng-click="vm.addRemoveProdWishList(product.key)" class="block1-icon flex-c-m wrap-pic-max-w" ng-class="vm.inFavorites(product.key) == true ? 'js-addedwish-b1' : 'js-addwish-b1'">
+													<img class="icon-addwish-b1" src="./images/icons/icon-heart.png" alt="ICON">
+													<img class="icon-addedwish-b1" src="./images/icons/icon-heart2.png" alt="ICON">
+												</a>
+
+											</div>
+										</div>
+									</div>
+									<div class="flex-w flex-m p-t-15 p-b-30">
+										<!-- <div class="wrap-num-product flex-w flex-m bg12 p-rl-10 m-b-30 col-lg-4 col-sm-4 col-xs-4">
+											<div class="btn-num-product-down flex-c-m fs-29"></div>
+
+											<input class="txt-m-102 cl6 txt-center num-product" type="number" name="num-product" min="1" max="99" id="id_grid_prod_input_{{product.key}}" ng-value="{{vm.added_products[product.key].quantity || 1}}">
+
+											<div class="btn-num-product-up flex-c-m fs-16"></div>
+										</div> -->
+
+										<div class="col-lg-12 col-sm-12 col-xs-12 rm-pl">
+											<button ng-click="vm.onAddItem(product)" data-toggle="modal" data-target="#myModal" class="flex-c-m txt-s-103 cl0 bg10 size-a-2 size-add-to-cart hov-btn2 trans-04 m-b-30">
+												Add to cart
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<!-- Shop list -->
+					<div ng-class="vm.hidePhotos == 'true' ? '' : 'dis-none'" class="shop-list">
+						<div ng-class="vm.hidePhotos == 'true' ? 'p-b-30' : 'p-b-30'" class="row" ng-repeat="product in vm.products track by $index">
+							<div ng-hide="vm.hidePhotos == 'true'" class=" col-sm-5 col-lg-4">
+								<a href="#/productSingle?key={{product.key}}" class="wrap-pic-w bo-all-1 bocl12 hov8 trans-04 item-grid-div">
+									<img class="set-product-img-max-height" id="img_{{product.key}}" ng-if="product.image" ng-src="https://web.scriptr.io/apsdb/rest/{{vm.account}}/GetFile?apsws.time={{vm.time}}&apsws.authSig={{vm.authSig}}&apsws.responseType=json&apsws.authMode=simple&apsdb.fileName={{product.image}}&apsdb.fieldName=attachments&apsdb.documentKey={{product.key}}&apsdb.store=DefaultStore"/>
+
+									<img id="img_{{product.key}}" ng-if="!product.image" class="set-product-img-max-height" ng-src="/images/dish256.png"/>
+
+								</a>
+							</div>
+
+							<div class=" col-sm-7 col-lg-8">
+								<div ng-class="vm.hidePhotos == 'true' ? 'p-b-5' : 'p-b-20'" class="p-t-5">
+									<div class="flex-w flex-sb-m m-b-15">
+										<a href="#/productSingle?key={{product.key}}" class="item-name-list txt-m-120 cl3 hov-cl10 trans-04 m-r-20 js-name2">
+											{{product.name}}
+										</a>
+
+										<a  ng-show="vm.isLoggedIn == true" href="javascript:void(0)" ng-click="vm.addToFavorites(product.key)" class="lh-00 pos-relative how-icon1 m-tb-15 js-addwish1" ng-class="vm.inFavorites(product.key) == true ? 'js-addedwish1' : 'js-addwish1'">
+											<img class="icon-main trans-04" src="./images/icons/icon-heart-color.png" alt="ICON">
+											<img class="ab-t-l icon-hov trans-04" src="./images/icons/icon-heart-color2.png" alt="ICON">
+										</a>
+									</div>
+
+									<span class="txt-m-104 cl9">
+										<span ng-if="!product.priceOffer" style="color:#81b03f;">€{{product.price}}</span>
+										<s ng-if="product.priceOffer" style="color:red;"> €{{product.price}}</s>
+										<span ng-if="product.priceOffer" style="color:#81b03f;"> €{{product.priceOffer}}</span>
+										<span ng-if="product.unit"> / {{product.unit}}</span>
+									</span>
+
+									<p ng-class="vm.hidePhotos == 'true' ? 'p-t-5' : 'p-t-18'" ng-if="product.default_ingredients" class="txt-s-101 cl9">
+										Ingredients: {{product.default_ingredients.toString()}}
+									</p>
+
+									<p ng-class="vm.hidePhotos == 'true' ? 'p-t-5' : 'p-t-18'" ng-if="product.description" class="txt-s-101 cl6">
+										Description: {{product.description}}
+									</p>
+
+									<div ng-class="vm.hidePhotos == 'true' ? 'p-t-10 p-b-10' : 'p-t-15 p-b-30'" class="flex-w flex-m">
+										<!-- <div class="wrap-num-product flex-w flex-m bg12 p-rl-10 m-b-30 col-lg-3 col-sm-4 col-xs-4">
+											<div class="btn-num-product-down flex-c-m fs-29"></div>
+
+											<input class="txt-m-102 cl6 txt-center num-product" type="number" name="num-product" id="id_list_prod_input_{{product.key}}" min="1" max="99" ng-value="{{vm.added_products[product.key].quantity || 1}}">
+
+											<div class="btn-num-product-up flex-c-m fs-16"></div>
+										</div> -->
+
+										<div class="col-lg-4 col-sm-8 col-xs-8 rm-pl">
+											<button ng-class="vm.hidePhotos == 'true' ? 'm-b-10' : 'm-b-30'" ng-click="vm.onAddItem(product)" data-toggle="modal" data-target="#myModal" class="flex-c-m txt-s-103 cl0 bg10 size-a-2 size-add-to-cart hov-btn2 trans-04">
+												Add to cart
+											</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Modal -->
+					<div id="myModal" class="modal fade m-t-100" role="dialog">
+						<div class="modal-dialog">
+
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h3 style="color: #81b03f" class="modal-title js-name1">{{vm.selectedProduct.name}}</h3>
+								</div>
+								<div class="modal-body">
+									<div ng-if="vm.selectedProduct.halfPortionPrice">
+										<span class="txt-m-103 cl3 txt-center hov-cl10 trans-04">Choose portion</span>
+										<div class="m-b-30">
+											<div class="flex-w flex-m btm-border p-tb-16">
+												<label style="width: 50%;" class="flex-sb-m-override flex-w txt-s-101 cl6 hov-cl10 trans-04 p-tb-3 pointer">
+													<input id="portion" class="pointer" type="radio" name="portion" value="full" ng-checked=true>
+													<span class="set-radio-label m-r-5">Full </span>
+													<b ng-if="!vm.selectedProduct.priceOffer" style="color:#81b03f;"> €{{vm.selectedProduct.price}}</b>
+													<b ng-if="vm.selectedProduct.priceOffer" style="color:#81b03f;"> €{{vm.selectedProduct.price}}</b>
+												</label>
+												<label style="width: 50%;" class="flex-sb-m-override flex-w txt-s-101 cl6 hov-cl10 trans-04 p-tb-3 pointer">
+													<input id="portion" class="pointer" type="radio" name="portion" value="half">
+													<span class="set-radio-label m-r-5">Half </span><b style="color:#81b03f;"> €{{vm.selectedProduct.halfPortionPrice}}</b>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="m-b-30" ng-if="vm.defaultIngredients.length > 0">
+										<span class="txt-m-103 cl3 txt-center hov-cl10 trans-04">Default Ingredients</span>
+										<ul class="btm-border p-tb-16 ingredients-modal">
+											<li class="p-b-5" style="width:33%;" ng-repeat="ingredient in vm.defaultIngredients track by $index">
+												<label class="flex-sb-m-override flex-w txt-s-101 cl6 hov-cl10 trans-04 p-tb-3 pointer">
+													<input class="pointer" type="checkbox" checklist-model="vm.defaultIngredientsFilters" checklist-value="ingredient">
+													<span class="set-radio-label">{{ingredient}}</span>
+												</label>
+											</li>
+										</ul>
+									</div>
+									<div class="m-b-30" ng-if="vm.extraIngredients.length > 0">
+										<span class="txt-m-103 cl3 txt-center hov-cl10 trans-04">Extra Ingredients</span>
+										<ul class="btm-border p-tb-16 ingredients-modal">
+											<li class="p-b-5" style="width:33%;" ng-repeat="ingredient in vm.extraIngredients track by $index">
+												<label class="flex-sb-m-override flex-w txt-s-101 cl6 hov-cl10 trans-04 p-tb-3 pointer">
+													<input class="pointer" type="checkbox" checklist-model="vm.extraIngredientsFilters" checklist-value="ingredient">
+													<span class="set-radio-label">{{ingredient}}</span>
+												</label>
+											</li>
+										</ul>
+									</div>
+									<div>
+										<span class="txt-m-103 cl3 txt-center hov-cl10 trans-04">Notes:</span>
+										<textarea placeholder="e.g. Well done (if you add ingredients in notes, there might be additional cost)" class="custom-textarea" ng-model="vm.comments" rows="4" cols="50">
+					        </textarea>
+									</div>
+								</div>
+								<div class="flex-w flex-m p-t-15 p-b-30">
+									<div class="col-centered flex-m">
+										<div class="wrap-num-product flex-w flex-m bg12 p-rl-10 m-b-30 col-lg-5 col-sm-5 col-xs-5">
+											<div class="btn-num-product-down flex-c-m fs-29"></div>
+
+											<input class="txt-m-102 cl6 txt-center num-product" type="number" name="num-product" id="id_popup_prod_input_{{vm.selectedProduct.key}}" min="1" max="99" ng-value="1">
+
+											<div class="btn-num-product-up flex-c-m fs-16"></div>
+										</div>
+
+										<div class="col-lg-7 col-sm-7 col-xs-7 rm-pl">
+											<button ng-click="vm.updateBasket(vm.selectedProduct)" data-dismiss="modal" class="flex-c-m txt-s-103 cl0 bg10 size-a-2 size-add-to-cart hov-btn2 trans-04 m-b-30 js-addcart1">
+												Add to cart
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<!-- Pagination -->
+					<div ng-show="vm.products && vm.productsCount > vm.resultsPerPage" class="flex-w flex-c-m p-t-47">
+						<a id="page_{{$index+1}}" ng-repeat="x in [].constructor(vm.paginations) track by $index" ng-click="vm.getProductsByPage($index+1)" href="javascript:void(0)" class="flex-c-m txt-s-115 cl6 size-a-23 bo-all-1 bocl15 hov-btn1 trans-04 m-all-3" ng-class="$index == 0 ? 'active-pagi1' : ''">
+							{{$index+1}}
+						</a>
+
+						<!--a href="javascript:void(0)"" class="flex-c-m txt-s-115 cl6 size-a-24 how-btn1 bo-all-1 bocl15 hov-btn1 trans-04 m-all-3 p-b-1">
+							Next
+							<span class="lnr lnr-chevron-right m-t-3 m-l-7"></span>
+							<span class="lnr lnr-chevron-right m-t-3"></span>
+						</a-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
