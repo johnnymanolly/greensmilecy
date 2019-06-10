@@ -12,7 +12,7 @@
 
 ## Dashboard:
 
-  https://www.greensmilecy.com/#/admin  
+  http://www.greensmilecy.com/#/admin  
   username: admin  
   password: admin  
   
