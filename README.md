@@ -2,7 +2,7 @@
 
 ## Website:  
 
-  https://www.greensmilecyprus.com  
+  https://www.greensmilecy.com  
 
 ## Backend Workspace:
 
@@ -12,7 +12,7 @@
 
 ## Dashboard:
 
-  https://www.greensmilecyprus.com/#/admin  
+  https://www.greensmilecy.com/#/admin  
   username: admin  
   password: admin  
   
