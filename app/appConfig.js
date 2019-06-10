@@ -1,10 +1,13 @@
+var domain = "greensmilecy";
+
 var httpsConfig = ["httpClientProvider",function (httpClientProvider) {
-  httpClientProvider.setBaseUrl("https://antreaspanagi.scriptrapps.io");
+  httpClientProvider.setBaseUrl("https://" + domain + ".scriptrapps.io");
   httpClientProvider.setType("user");
  // httpClientProvider.setToken("UEYzNUVERTI0QzpzY3JpcHRyOkQ1MUE2ODI5ODNDNkQxQkFDNTNDNzlGRjZDRDNDNzc3");
 }]
 
 myApp.config(httpsConfig)
+    .constant("domain", domain)
     .constant("account", "T952F6A0BA")
     .constant("time", "1558078524306")
     .constant("authSig", "8721108710ea6ea76ffe2142cb093296")
@@ -14,6 +17,10 @@ myApp.config(httpsConfig)
     "params": [
 
         {"route": "",                   "template": "/templates/home_page/Home.html",          controller: "homeCtrl as vm"},
+  
+   //   {"route": "",                   "template": "/templates/others/ComingSoon.html",        controller: "comingSoonCtrl as vm"},
+        
+        {"route": "admin",              "template": "/templates/others/Blank.html",             controller: "adminCtrl as vm"},
 
         {"route": "login",              "template": "/templates/Login.html",                    controller: "loginCtrl as vm"},
 
@@ -45,7 +52,7 @@ myApp.config(httpsConfig)
        
 
     ],
-    "otherwiseOption" : {"template": "/home"}
+    "otherwiseOption" : {"template": "/templates/home_page/Home.html"}
 })
     .config(function($routeProvider, routingJson){
     for(var i = 0; i < routingJson.params.length; i++){
