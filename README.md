@@ -17,6 +17,6 @@
   password: admin  
   
 ## Email accounts:  
-https://gator3221.hostgator.com:2096/cpsess9582716147/webmail/hostgator/index.html?login=1&post_login=105864802735  
+http://webmail.greensmilecy.com   
 support@greensmilecy.com  
 ^D&E]8x16pGh  
