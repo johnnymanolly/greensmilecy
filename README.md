@@ -7,7 +7,7 @@
 ## Backend Workspace:
 
   https://www.scriptr.io/login  
-  username: support@greensmilecy.com
+  username: support@greensmilecy.com  
   password: greensmilecy   
 
 ## Dashboard:
