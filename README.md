@@ -13,8 +13,8 @@
 ## Dashboard:
 
   http://www.greensmilecy.com/#/admin  
-  username: admin  
-  password: admin  
+  username: greensmile  
+  password: greensmile  
   
 ## Email accounts:  
 http://webmail.greensmilecy.com   
