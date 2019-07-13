@@ -18,7 +18,7 @@ myApp.config(httpsConfig)
 
         {"route": "",                   "template": "/templates/home_page/Home.html",          controller: "homeCtrl as vm"},
   
-   //   {"route": "",                   "template": "/templates/others/ComingSoon.html",        controller: "comingSoonCtrl as vm"},
+     //   {"route": "",                   "template": "/templates/others/ComingSoon.html",        controller: "comingSoonCtrl as vm"},
         
         {"route": "admin",              "template": "/templates/others/Blank.html",             controller: "adminCtrl as vm"},
 
@@ -62,7 +62,7 @@ myApp.config(httpsConfig)
             templateUrl: routingJson.params[i].template,
             controller: routingJson.params[i].controller,
         })
-            .otherwise({redirectTo:'/home'})                                          
+            .otherwise({redirectTo:''})                                          
     }
 }); 
 

@@ -3,7 +3,7 @@
 <head> 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-	<title>Flower Shop</title> 
+	<title>Green Smile</title> 
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -54,7 +54,7 @@
 
 
 	<!-- Header -->
-	<header ng-include="'/templates/header/Header.html'"></header>
+	<header ng-if="!vm.showComingSoon" ng-include="'/templates/header/Header.html'"></header>
 
     <!-- Home Title page -->
 	<div ng-if="vm.showHomeTitlePage" ng-include="'/templates/blocks/HomeTitlePage.html'"></div>
