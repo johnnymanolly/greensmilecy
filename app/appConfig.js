@@ -8,10 +8,10 @@ var httpsConfig = ["httpClientProvider",function (httpClientProvider) {
 
 myApp.config(httpsConfig)
     .constant("domain", domain)
-    .constant("account", "T952F6A0BA")
-    .constant("time", "1558078524306")
-    .constant("authSig", "8721108710ea6ea76ffe2142cb093296")
-    .constant("auth_token", "VDk1MkY2QTBCQQ==")
+    .constant("account", "Q3A5980396")
+    .constant("time", "1563037209246")
+    .constant("authSig", "37bef999cfe1f9a46c023cfd7392f1b7")
+    .constant("auth_token", "UTNBNTk4MDM5Ng==")
     .constant("resultsPerPage", "24")
     .constant("routingJson",  {
     "params": [
