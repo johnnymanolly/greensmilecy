@@ -1,4 +1,4 @@
-myApp.controller('productSingleCtrl', function($scope, $timeout, $routeParams, $location, account, time, authSig, initService, dataService) {
+myApp.controller('productSingleCtrl', function($scope, $sce, $timeout, $routeParams, $location, account, time, authSig, initService, dataService) {
 
     var vm = this;
     vm.isLoggedIn = dataService.isLoggedIn($scope);
@@ -40,6 +40,9 @@ myApp.controller('productSingleCtrl', function($scope, $timeout, $routeParams, $
                 if(data)
                 {
                     vm.product = data;
+
+                    vm.html = vm.product.description;
+                    vm.trustedHtml = $sce.trustAsHtml(vm.html);
 
                     vm.images = [];
                     if(vm.product["attachments"])

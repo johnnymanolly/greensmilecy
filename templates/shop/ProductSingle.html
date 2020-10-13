@@ -251,9 +251,9 @@
 
 					</div>
 
-					<p class="txt-s-101 cl6">
-						{{vm.product.description}}
-					</p>
+					<pre ng-bind-html="vm.trustedHtml" class="txt-s-101 cl6">
+						
+					</pre>
 
 					<div class="flex-w flex-m p-t-55 p-b-30">
 						<!-- <div class="wrap-num-product flex-w flex-m bg12 p-rl-10 m-r-30 m-b-30">
@@ -382,9 +382,9 @@
 										<span ng-if="product.unit"> / {{product.unit}}</span>
 									</span>
 
-								<span ng-if="product.default_ingredients || product.description" class="block1-content-more txt-s-101 cl9 p-t-13 trans-04 set-unit-length">
+								<pre ng-if="product.default_ingredients || product.description" class="block1-content-more txt-s-101 cl9 p-t-13 trans-04 set-unit-length">
 										{{product.default_ingredients.toString() || product.description}}
-									</span>
+									</pre>
 
 								<!--span ng-if="!product.default_ingredients && product.unit" class="block1-content-more txt-m-104 cl9 p-t-13 trans-04 set-unit-length">
                                     {{product.unit}}
